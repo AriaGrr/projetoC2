@@ -164,6 +164,7 @@ int listarClientes(Clientes t){
         for (int i = 0; i < t.qtd; i++) {
             printf("Nome: %s\n", t.contas[i].nome);
             printf("CPF: %s\n", t.contas[i].cpf);
+            printf("Tipo: %s\n", t.contas[i].tipo);
             printf("Saldo: %.2f\n", t.contas[i].saldo);
             printf("\n");
         }
