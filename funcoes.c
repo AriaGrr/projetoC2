@@ -21,56 +21,71 @@ wprintf(L"Digite a opção desejada: ");
 }
 
 int cadastrarCliente(Clientes *t){
-        printf("Cadastrar cliente:\n");
+    printf("Cadastrar cliente:\n");
 
-        // Limpando o buffer do teclado antes de ler a categoria
-        while (getchar() != '\n');
+    // Limpando o buffer do teclado antes de ler a categoria
+    while (getchar() != '\n');
 
     char nome[100];
     printf("Digite o nome do cliente: ");
     scanf("%s", nome);
 
-    char cpf[15];
-    printf("Digite o cpf do cliente (14 dígitos): ");
+
+    // Verifica se o nome contém apenas letras
+    while (strspn(nome, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") != strlen(nome)) {
+        printf("Nome inválido. O nome deve conter apenas letras: ");
+        scanf("%s", nome);
+    }
+
+    char cpf[11];
+    printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
 
-    // Verifica se já existe uma conta com o mesmo cpf
-    for (int i = 0; i < qtd; i++) {
-        if (strcmp(cpf, Clientes[i].cpf) == 0) {
-            printf("Já existe uma conta com esse CNPJ!\n");
-            return;
+    // Validar que o CPF informado tem 11 dígitos
+    while (strlen(cpf) != 11) {
+        printf("CPF inválido. Informe um CPF com 11 dígitos: ");
+        scanf("%s", cpf);
+        while (strspn(cpf, "0123456789") != strlen(cpf)) {
+            printf("Cpf invalido. O cpf deve conter apenas números: ");
+            scanf("%s", cpf);
         }
     }
 
-    char senha[100];
+    char senha[6];
     printf("Digite a senha do cliente: ");
     scanf("%s", senha);
 
-    char tipo[10];
+    while (strlen(senha) != 6) {
+        printf("Senha invalida. digite uma senha com seis digitos númericos: ");
+        scanf("%s", senha);
+            while (strspn(senha, "0123456789") != strlen(senha)) {
+        printf("Senha invalida. A senha deve conter apenas números: ");
+        scanf("%s", senha);
+    }
+    }
+
+    char tipo;
     printf("Escolha o tipo de conta: ");
     printf("1 - Comum\n");
     printf("2 - Plus\n");
     scanf("%s", tipo);
 
-    if (strcmp(tipo, "1") == 0) {
-        strcpy(tipo, "comum");
-    } else if (strcmp(tipo, "2") == 0) {
-        strcpy(tipo, "plus");
-    } else {
-        printf("Tipo de conta inválido!\n");
-        return;
+    while (tipo != '1' && tipo != '2') {
+        printf("Tipo de conta inválido. Escolha 1 para conta comum ou 2 para conta plus: ");
+        scanf("%s", tipo);
     }
 
-    // Adiciona a conta ao array de Clientes
-    strcpy(Clientes[qtd].nome, nome);
-    strcpy(Clientes[qtd].cnpj, cpf);
-    strcpy(Clientes[qtd].senha, senha);
-    Clientes[qtd].saldo = 0;
-    strcpy(Clientes[qtd].tipo, tipo);
+    if (tipo == '1') {
+        tipo = "comum";
+    } else {
+        tipo = "plus";
+    }
 
-    qtd++;
+    float saldo;
+    printf("Digite o saldo inicial: ");
+    scanf("%f", &saldo);
 
-        return 0;
+    return 0;
     }
 
 int apagarCliente(){
