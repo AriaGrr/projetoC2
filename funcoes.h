@@ -14,19 +14,20 @@ typedef struct {
 
 void menu();
 
-int cadastrarCliente();
+int cadastrarCliente(Clientes *t);
 
-int apagarCliente();
+int apagarCliente(Clientes *t);
 
-int listarClientes();
+int listarClientes(Clientes t);
 
-int debito();
+int debito(Clientes *t);
 
-int deposito();
+int deposito(Clientes *t);
 
-int extrato();
+//Struct com os extratos?
+int extrato(Clientes t);
 
-int transferencia();
+int transferencia(Clientes *t);
 
 int tipoConta(char tipo);
 

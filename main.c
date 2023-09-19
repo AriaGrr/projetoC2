@@ -34,16 +34,16 @@ int main(){
         printf("Saindo...\n");
     }
     else if (opcao == 1){
-        cadastrarCliente();
+        cadastrarCliente(&t);
         system(CLEAR_SCREEN);
     }
     else if (opcao == 2){
-        apagarCliente();
+        apagarCliente(&t);
         system(CLEAR_SCREEN);
     }
     else if (opcao == 3){
         system(CLEAR_SCREEN);
-        listarClientes(); 
+        listarClientes(t); 
         printf("Pressione Enter para voltar ao menu...");
         getchar(); // Captura o Enter
         getchar(); // Aguarda o próximo Enter
@@ -51,16 +51,16 @@ int main(){
         system(CLEAR_SCREEN);
     }
     else if (opcao == 4){
-        debito();
+        debito(&t);
         system(CLEAR_SCREEN);
     }
     else if (opcao == 5){
-        deposito();
+        deposito(&t);
         system(CLEAR_SCREEN);
     }
     else if (opcao == 6){
         system(CLEAR_SCREEN);
-        extrato();
+        extrato(t);
         printf("Pressione Enter para voltar ao menu...");
         getchar(); // Captura o Enter
         getchar(); // Aguarda o próximo Enter
@@ -68,7 +68,7 @@ int main(){
         system(CLEAR_SCREEN);
     }
     else if (opcao == 7){
-        transferencia();
+        transferencia(&t);
         system(CLEAR_SCREEN);
     }
      else {
