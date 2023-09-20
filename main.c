@@ -1,20 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <locale.h>
 #include "funcoes.h"
 
-#ifdef _WIN32 // Verifica se é Windows
-    #define CLEAR_SCREEN "cls"
-    #define PAUSE "pause"
-#else
-    #define CLEAR_SCREEN "clear"
-    #define PAUSE "read -p 'Pressione Enter para continuar...' -n1 -s"
-#endif
-
-
 int main(){
-    setlocale(LC_ALL, "Portuguese");
-
     int cod;
     char arquivo[] = "clientes";
     Clientes t;
@@ -34,42 +22,42 @@ int main(){
         printf("Saindo...\n");
     }
     else if (opcao == 1){
-        cadastrarCliente(&t);
-        system(CLEAR_SCREEN);
+        cadastrarCliente(&listas, &contas);
+        system("clear");
     }
     else if (opcao == 2){
         apagarCliente(&t);
-        system(CLEAR_SCREEN);
+        system("clear");
     }
     else if (opcao == 3){
-        system(CLEAR_SCREEN);
+        system("clear");
         listarClientes(t); 
         printf("Pressione Enter para voltar ao menu...");
         getchar(); // Captura o Enter
         getchar(); // Aguarda o próximo Enter
 
-        system(CLEAR_SCREEN);
+        system("clear");
     }
     else if (opcao == 4){
         debito(&t);
-        system(CLEAR_SCREEN);
+        system("clear");
     }
     else if (opcao == 5){
         deposito(&t);
-        system(CLEAR_SCREEN);
+        system("clear");
     }
     else if (opcao == 6){
-        system(CLEAR_SCREEN);
+        system("clear");
         extrato(t);
         printf("Pressione Enter para voltar ao menu...");
         getchar(); // Captura o Enter
         getchar(); // Aguarda o próximo Enter
 
-        system(CLEAR_SCREEN);
+        system("clear");
     }
     else if (opcao == 7){
         transferencia(&t);
-        system(CLEAR_SCREEN);
+        system("clear");
     }
      else {
             wprintf(L"Opção não existe!\n");

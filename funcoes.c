@@ -3,7 +3,6 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
-#include <locale.h>
 #include "funcoes.h"
 
 // Função que imprime o menu principal
@@ -20,7 +19,7 @@ wprintf(L"0 - Sair\n");
 wprintf(L"Digite a opção desejada: ");
 }
 
-int cadastrarCliente(Clientes *t){
+int cadastrarCliente(Clientes *lista, Conta *contas){
     printf("Cadastrar cliente:\n");
 
     // Limpando o buffer do teclado antes de ler a categoria
@@ -64,7 +63,7 @@ int cadastrarCliente(Clientes *t){
     }
     }
 
-    char tipo;
+    int tipo;
     printf("Escolha o tipo de conta: ");
     printf("1 - Comum\n");
     printf("2 - Plus\n");
@@ -75,23 +74,16 @@ int cadastrarCliente(Clientes *t){
         scanf("%s", tipo);
     }
 
-    if (tipo == '1') {
-        tipo = "comum";
-    } else {
-        tipo = "plus";
-    }
-
     float saldo;
     printf("Digite o saldo inicial: ");
     scanf("%f", &saldo);
 
-    while (saldo > 0) {
+    // Converte o saldo para uma string
+    char saldo_str[100000000];
+    sprintf(saldo_str, "%f", saldo);
+    while (saldo < 0) {
         printf("Saldo inválido. Informe um valor maior ou igual a zero: ");
         scanf("%f", &saldo);
-        // Converte o saldo para uma string
-        char saldo_str[100000000];
-        sprintf(saldo_str, "%f", saldo);
-
         // Verifica se o saldo contém apenas números
         for (int i = 0; i < strlen(saldo_str); i++) {
             if (!isdigit(saldo_str[i])) {
@@ -101,6 +93,11 @@ int cadastrarCliente(Clientes *t){
             }
         }
     }
+
+    float saldo = atof(saldo_str);
+
+    // Colocar na lista de contas pelo ponteiro
+
     return 0;
     }
 
@@ -124,51 +121,7 @@ int apagarCliente(Clientes *t){
 // Lista todos os clientes cadastrados dividida por tipo de conta
 int listarClientes(Clientes t){
     printf("Lista de clientes:\n");
-    printf("1 - Listar clientes comuns\n");
-    printf("2 - Listar clientes plus\n");
-    printf("3 - Listar todos os clientes\n");
-    printf("0 - Voltar ao menu principal\n");
-    printf("Digite a opção desejada: ");
-    int opcao;
-    scanf("%d", &opcao);
-
-    while (opcao != 0 && opcao != 1 && opcao != 2 && opcao != 3) {
-        printf("Opção inválida. Digite 1 para listar clientes comuns, 2 para listar clientes plus ou 3 para listar todos os clientes: ");
-        scanf("%d", &opcao);
-
-    return 0;
-    }
-
-    if (opcao == 1) {
-        printf("Clientes comuns:\n");
-        for (int i = 0; i < t.qtd; i++) {
-            if (t.contas[i].tipo == "comum") {
-                printf("Nome: %s\n", t.contas[i].nome);
-                printf("CPF: %s\n", t.contas[i].cpf);
-                printf("Saldo: %.2f\n", t.contas[i].saldo);
-                printf("\n");
-            }
-        }
-    } else if (opcao == 2) {
-        printf("Clientes plus:\n");
-        for (int i = 0; i < t.qtd; i++) {
-            if (t.contas[i].tipo == "plus") {
-                printf("Nome: %s\n", t.contas[i].nome);
-                printf("CPF: %s\n", t.contas[i].cpf);
-                printf("Saldo: %.2f\n", t.contas[i].saldo);
-                printf("\n");
-            }
-        }
-    } else if (opcao == 3) {
-        printf("Todos os clientes:\n");
-        for (int i = 0; i < t.qtd; i++) {
-            printf("Nome: %s\n", t.contas[i].nome);
-            printf("CPF: %s\n", t.contas[i].cpf);
-            printf("Tipo: %s\n", t.contas[i].tipo);
-            printf("Saldo: %.2f\n", t.contas[i].saldo);
-            printf("\n");
-        }
-    }
+    for 
     return 0;
 }
 
@@ -199,7 +152,7 @@ int deposito(Clientes *t){
     }
 
 // Extrato - gera um arquivo com o histórico de todas as operações realizadas na conta, com datas e valores, incluindo as tarifas.
-int extrato(Clientes *t){
+int extrato(Clientes t){
     printf("Extrato:\n");
     char cpf[11];
     printf("Digite o CPF do cliente: ");
@@ -234,11 +187,11 @@ int transferencia(Clientes *t){
 
 int tipoConta(char tipo){
     int taxa, negativo;
-    if (tipo == "comum"){
+    if (tipo == "1"){
         taxa = 5;
         negativo = 1000;
     }
-    else if (tipo == "plus"){
+    else if (tipo == "2"){
         taxa = 3;
         negativo = 5000;
     }
@@ -256,9 +209,9 @@ int salvar(Clientes t, char nome[]) {
         return 1;
     }
 
-    for (int i = 0; i < t.qtd; i++) {
-        fwrite(&t.contas[i], sizeof(Conta), 1, arquivo);
-    }
+    // for (int i = 0; i < t.qtd; i++) {
+    //     fwrite(&t.contas[i], sizeof(Conta), 1, arquivo);
+    // }
 
     fclose(arquivo);
     return 0;
@@ -275,12 +228,12 @@ int carregar(Clientes *t, char nome[]) {
         return 1;
     }
 
-    t->qtd = 0; // Inicialize o contador de contas carregadas
+    // t->qtd = 0; // Inicialize o contador de contas carregadas
 
-    while (fread(&t->contas[t->qtd], sizeof(Conta), 1, arquivo) == 1) {
-        t->qtd++;
-    }
+    // while (fread(&t->contas[t->qtd], sizeof(Conta), 1, arquivo) == 1) {
+    //     t->qtd++;
+    // }
 
-    fclose(arquivo);
-    return 0;
+    // fclose(arquivo);
+    // return 0;
 }

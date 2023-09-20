@@ -1,20 +1,25 @@
 #include <stdio.h>
+
 typedef struct {
   char nome[100];
   char cpf[11];
   char senha[6];
-  char tipo;
+  int tipo;
   float saldo;
 } Conta;
 
 typedef struct {
-  struct Conta *contas;
+  Conta *contas;
   size_t qtd;
 } Clientes;
 
+typedef struct {
+
+} Extrato;
+
 void menu();
 
-int cadastrarCliente(Clientes *t);
+int cadastrarCliente(Clientes *lista, Conta *contas);
 
 int apagarCliente(Clientes *t);
 
