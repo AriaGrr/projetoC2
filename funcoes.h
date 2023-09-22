@@ -9,17 +9,21 @@ typedef struct {
 } Conta;
 
 typedef struct {
+  // Ponteiro ou lista
   Conta *contas;
   size_t qtd;
 } Clientes;
 
+// Struct com os extratos de cada conta
+// Gera um arquivo com o histórico de todas as operações realizadas na conta, com datas e valores, incluindo as tarifas.
 typedef struct {
 
 } Extrato;
 
+
 void menu();
 
-int cadastrarCliente(Clientes *lista, Conta *contas);
+int cadastrarCliente(Clientes *listas, Conta *contas);
 
 int apagarCliente(Clientes *t);
 

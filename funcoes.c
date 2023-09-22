@@ -19,7 +19,7 @@ wprintf(L"0 - Sair\n");
 wprintf(L"Digite a opção desejada: ");
 }
 
-int cadastrarCliente(Clientes *lista, Conta *contas){
+int cadastrarCliente(Clientes *listas, Conta *contas){
     printf("Cadastrar cliente:\n");
 
     // Limpando o buffer do teclado antes de ler a categoria
@@ -121,7 +121,7 @@ int apagarCliente(Clientes *t){
 // Lista todos os clientes cadastrados dividida por tipo de conta
 int listarClientes(Clientes t){
     printf("Lista de clientes:\n");
-    for 
+    // for
     return 0;
 }
 
