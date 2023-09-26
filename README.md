@@ -1,17 +1,18 @@
-Critérios de avaliação
+Critérios de avaliação:
 Código organizado e bem escrito: 
-dividido em funções;
-código formatado;
-bons nomes de variáveis e funções;
-uso correto dos tipos de variáveis;
+Dividido em funções;
+Código formatado;
+Bons nomes de variáveis e funções;
+Uso correto dos tipos de variáveis;
 Funcionamento:
-programa funciona corretamente;
-erros são tratados;
-usabilidade (se é possível entender como interagir com o programa);
-todas as funções pedidas estão presentes;
+Programa funciona corretamente;
+Erros são tratados;
+Usabilidade (se é possível entender como interagir com o programa);
+Todas as funções pedidas estão presentes;
+
 Documentação:
-o código está comentado;
-é possível entender a lógica a partir dos comentários no código;
+O código está comentado;
+É possível entender a lógica a partir dos comentários no código;
 Pontuação para cada função que precisa ser implementada:
 
 Novo cliente - 1 ponto
