@@ -203,17 +203,6 @@ int salvar(Clientes t, char nome[]) {
     return 0;
 }
 
-// Carrega os clientes de um arquivo
-// fread
-int carregar(Clientes *t, char nome[]) {
-    FILE *arquivo;
-    arquivo = fopen(nome, "rb");
-
-    if (arquivo == NULL) {
-        printf("Erro ao abrir o arquivo.\n");
-        return 1;
-    }
-
   // Carrega os clientes de um arquivo
 // fread
 int carregar(Clientes *t, char nome[]) {
@@ -239,11 +228,6 @@ int carregar(Clientes *t, char nome[]) {
 
     // Lê as contas do arquivo
     fread(t->contas, sizeof(Conta), t->qtd, arquivo);
-
-    fclose(arquivo);
-    return 0;
-}
-
 
     fclose(arquivo);
     return 0;
