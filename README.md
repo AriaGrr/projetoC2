@@ -28,9 +28,14 @@ Um menu de opções deve ser sempre apresentado ao operador, contendo as seguint
 0. Sair
 
 Cada opção deve ser implementada como uma função;
+
 O seu programa deve conseguir armazenar até 1000 clientes e as informações das últimas 100 operações (depósito, saque, transferência) realizada pelo cliente
+
 IMPORTANTE: Não se esqueça de que o banco não pode perder as informações se o programa terminar, fechar, parar de funcionar, ou o computador desligar. Todos os dados devem ser salvos de maneira permanente utilizando arquivos binários.
+
+
 Funções
+
 Opção 1 - Usada para criar novos clientes.
 Dados solicitados:
 Nome
@@ -38,18 +43,23 @@ CPF
 Tipo de conta (são dois: comum e plus)
 Valor inicial da conta
 Senha do usuário
+
 Opção 2 - Apaga o cliente pelo CPF
+
 Opção 3 - Listar todos os clientes
+
 Opção 4 - Serve para debitar um valor da conta do cliente
 Dados solicitados:
 CPF
 Senha
 Valor
 **O débito somente pode ser feito se o CPF e a senha estiverem corretos.**
+
 Opção 5 - Deposita um valor na conta do cliente
 Dados solicitados:
 CPF
 Valor
+
  Opção 6 - Extrato - gera um arquivo com o histórico de todas as operações realizadas na conta, com datas e valores, incluindo as tarifas.
 Dados solicitados:
 CPF
@@ -57,6 +67,7 @@ Senha
 O formato do extrato é livre, porém o arquivo de saída deve ser em formato txt e que possa ser aberto em qualquer editor de texto.
 Não é necessário armazenar as datas das transações
 O extrato só pode ser exibido se o CPF e senha estiverem corretos
+
 Opção 7 - Transferência - realiza a transferência de uma valor determinado de uma conta (Origem) para outra conta (Destino)
 Dados solicitados:
 CPF (Origem)
