@@ -18,6 +18,7 @@ typedef struct {
   struct operacao *extrato[100];
 } Conta;
 
+// Lista de contas
 struct cliente cs[1000];
 
 // cs[0].extrato[0].valor
