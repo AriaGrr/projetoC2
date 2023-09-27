@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// Struct com os dados de cada conta
 typedef struct {
   char nome[100];
   char cpf[11];
@@ -8,6 +9,7 @@ typedef struct {
   float saldo;
 } Conta;
 
+// Struct com os dados de cada cliente
 typedef struct {
   // Ponteiro ou lista
   Conta *contas;

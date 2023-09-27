@@ -19,6 +19,7 @@ void menu(){
     printf("Digite a opção desejada: ");
 }
 
+// Função para cadastrar cada cliente
 int cadastrarCliente(Clientes *listas, Conta *contas){
     printf("Cadastrar cliente:\n");
 
@@ -75,6 +76,8 @@ int cadastrarCliente(Clientes *listas, Conta *contas){
     return 0;
 }
 
+// Apaga um cliente da lista de contas
+// Fazer por ultimo!
 int apagarCliente(Clientes *t){
     printf("Apagar cliente:\n");
     char cpf[12]; // Incluindo espaço para o caractere nulo '\0'
@@ -116,6 +119,7 @@ int debito(Clientes *t){
     return 0;
 }
 
+// Deposito - realiza o depósito de um valor determinado em uma conta
 int deposito(Clientes *t){
     char cpf[12]; // Incluindo espaço para o caractere nulo '\0'
     printf("Depósito:\n");
@@ -173,6 +177,7 @@ int transferencia(Clientes *t){
     return 0;
 }
 
+// Função que retorna a taxa de transação e o valor negativo de cada tipo de conta
 int tipoConta(char tipo){
     int taxa, negativo;
     if (tipo == 1){
@@ -186,7 +191,7 @@ int tipoConta(char tipo){
     return taxa, negativo;
 }
 
-// Salva a lista de tarefas em um arquivo
+// Salva os clientes em um arquivo
 // fwrite
 int salvar(Clientes t, char nome[]) {
     FILE *arquivo;
