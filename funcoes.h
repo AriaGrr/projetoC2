@@ -18,18 +18,18 @@ typedef struct {
   struct operacao *extrato[100];
 } Conta;
 
-// Lista de contas
-struct cliente cs[1000];
-
 // cs[0].extrato[0].valor
 
-// // Struct com os dados de cada cliente
-// typedef struct {
-//   // Ponteiro ou lista
-//   Conta contas[1000];
-//    Conta *contas;
-//   size_t qtd;
-// } Clientes;
+// Struct com os dados de cada cliente
+typedef struct {
+  // Ponteiro ou lista
+  // Conta contas[1000];
+  //  Conta *contas;
+
+  // Lista de contas
+  struct Conta contas[1000];
+  size_t qtd;
+} Clientes;
 
 void menu();
 

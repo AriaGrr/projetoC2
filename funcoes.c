@@ -238,7 +238,7 @@ int salvar(Clientes t, char nome[]) {
 
   // Carrega os clientes de um arquivo
 // fread
-int carregar(Clientes *t, char nome[]) {
+int carregar(Clientes *contas, char nome[]) {
     FILE *arquivo;
     arquivo = fopen(nome, "rb");
 
@@ -247,6 +247,9 @@ int carregar(Clientes *t, char nome[]) {
         return 1;
     }
 
+    // Declara a variável t
+    Clientes *t = contas;
+    
     // Lê a quantidade de contas do arquivo
     fread(&t->qtd, sizeof(size_t), 1, arquivo);
 
