@@ -1,38 +1,67 @@
-Critérios de avaliação
-Código organizado e bem escrito: 
-dividido em funções;
-código formatado;
-bons nomes de variáveis e funções;
-uso correto dos tipos de variáveis;
-Funcionamento:
-programa funciona corretamente;
-erros são tratados;
-usabilidade (se é possível entender como interagir com o programa);
-todas as funções pedidas estão presentes;
-Documentação:
-o código está comentado;
-é possível entender a lógica a partir dos comentários no código;
-Pontuação para cada função que precisa ser implementada:
+Neste projeto iremos desenvolver um sistema em C que controla os clientes para um banco ficticio chamado QuemPoupaTem.
+Há duas versões do programa em branches diferentes, uma para ser executada no replit (branch: replit) e outra para ser rodada no windows (branch: main).
 
-Novo cliente - 1 ponto
-Apaga cliente - 1 ponto
-Listar clientes - 1 ponto
-Débito - 1 ponto
-Depósito - 1 ponto
-Extrato - 2 ponto (1 ponto pelo armazenamento dos dados e 1 ponto pelo arquivo)
-Transferência Entre Contas - 1 ponto
-Salvar os dados em arquivo binário - 1 ponto
-Carregar os dados de um arquivo binário - 1 ponto
-O que pode causar perda de pontos (os pontos apresentados serão descontados da nota final):
-Projeto não estruturado (todas as funções em apenas um arquivo, falta de uso de funções, somente variáveis globais) -  5 pontos
-Funções que não recebem parâmetros e usam apenas variáveis globais - 1 ponto para cada função
-Uso incorreto dos tipos de variáveis e retornos de função - 1 ponto para cada função
-Variáveis e funções com nomes que não explicam o funcionamento - 1 ponto para cada função
-Loops desnecessários - 1 ponto para cada loop
-Entrega de código com apenas 1 commit no repositório - 10 pontos
-Falta de uso de branches para fazer o código - 2 ponto
-Falta do arquivo README.md no repositório explicando a proposta do projeto - 1 ponto
-Apenas pessoas que fizeram commits receberão notas. Alunos sem commits receberão nota zero.
-Entrega do código direto no replit - 10 pontos
-Código não compila ou não executa quando testado no replit - 5 pontos
-Plágio (igual ao de outro grupo, mesmo sendo em períodos diferentes ou de semestre anterior) - recebe nota zero
+Os requisitos do programa são: 
+- Dois tipos de conta:
+ Comum: 
+Cobra taxa de 5% a cada débito realizado
+Permite um saldo negativo de até (R$ 1.000,00)
+Plus:
+Cobra taxa de 3% a cada débito realizado
+Permite um saldo negativo de até (R$ 5.000,00)
+O sistema criado por você deve funcionar em loop infinito até que se deseje sair;
+Um menu de opções deve ser sempre apresentado ao operador, contendo as seguintes operações:
+1. Novo cliente
+
+2. Apaga cliente
+
+3. Listar clientes
+
+4. Débito
+
+5. Depósito
+
+6. Extrato
+
+7. Transferência Entre Contas
+
+0. Sair
+
+Cada opção deve ser implementada como uma função;
+O seu programa deve conseguir armazenar até 1000 clientes e as informações das últimas 100 operações (depósito, saque, transferência) realizada pelo cliente
+IMPORTANTE: Não se esqueça de que o banco não pode perder as informações se o programa terminar, fechar, parar de funcionar, ou o computador desligar. Todos os dados devem ser salvos de maneira permanente utilizando arquivos binários.
+Funções
+Opção 1 - Usada para criar novos clientes.
+Dados solicitados:
+Nome
+CPF
+Tipo de conta (são dois: comum e plus)
+Valor inicial da conta
+Senha do usuário
+Opção 2 - Apaga o cliente pelo CPF
+Opção 3 - Listar todos os clientes
+Opção 4 - Serve para debitar um valor da conta do cliente
+Dados solicitados:
+CPF
+Senha
+Valor
+**O débito somente pode ser feito se o CPF e a senha estiverem corretos.**
+Opção 5 - Deposita um valor na conta do cliente
+Dados solicitados:
+CPF
+Valor
+ Opção 6 - Extrato - gera um arquivo com o histórico de todas as operações realizadas na conta, com datas e valores, incluindo as tarifas.
+Dados solicitados:
+CPF
+Senha
+O formato do extrato é livre, porém o arquivo de saída deve ser em formato txt e que possa ser aberto em qualquer editor de texto.
+Não é necessário armazenar as datas das transações
+O extrato só pode ser exibido se o CPF e senha estiverem corretos
+Opção 7 - Transferência - realiza a transferência de uma valor determinado de uma conta (Origem) para outra conta (Destino)
+Dados solicitados:
+CPF (Origem)
+Senha (Origem)
+CPF (Destino)
+Valor
+O transferência só pode ser realizada se o CPF e a senha da conta de origem estiverem corretos
+
