@@ -1,5 +1,13 @@
 #include <stdio.h>
 
+// Struct com os extratos de cada conta
+// Gera um arquivo com o histórico de todas as operações realizadas na conta, com datas e valores, incluindo as tarifas.
+typedef struct {
+  double valor;
+  double taxa
+  char descricao[100];
+} Operacao;
+
 // Struct com os dados de cada conta
 typedef struct {
   char nome[100];
@@ -7,22 +15,21 @@ typedef struct {
   char senha[6];
   int tipo;
   float saldo;
+  struct operacao *extrato[100];
 } Conta;
 
-// Struct com os dados de cada cliente
-typedef struct {
-  // Ponteiro ou lista
-  Conta *contas;
-  size_t qtd;
-} Clientes;
+// Lista de contas
+struct cliente cs[1000];
 
-// Struct com os extratos de cada conta
-// Gera um arquivo com o histórico de todas as operações realizadas na conta, com datas e valores, incluindo as tarifas.
-typedef struct {
-  float valor;
-  char descricao[100];
-} Operacao;
+// cs[0].extrato[0].valor
 
+// // Struct com os dados de cada cliente
+// typedef struct {
+//   // Ponteiro ou lista
+//   Conta contas[1000];
+//    Conta *contas;
+//   size_t qtd;
+// } Clientes;
 
 void menu();
 
