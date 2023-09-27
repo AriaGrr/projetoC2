@@ -24,9 +24,9 @@ struct cliente cs[1000];
 
 // // Struct com os dados de cada cliente
 // typedef struct {
-//   // Ponteiro ou lista
+//    Ponteiro ou lista
 //   Conta contas[1000];
-//   // Conta *contas;
+//    Conta *contas;
 //   size_t qtd;
 // } Clientes;
 
