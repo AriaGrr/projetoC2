@@ -19,6 +19,12 @@ void menu(){
     printf("Digite a opção desejada: ");
 }
 
+void clearBuffer() {
+    char c;
+    while ((c = getchar()) != '\n' && c != EOF) 
+    ;
+}
+
 // Função para cadastrar cada cliente
 int cadastrarCliente(Clientes *listas, Conta *contas){
     printf("Cadastrar cliente:\n");

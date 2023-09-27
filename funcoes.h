@@ -26,6 +26,8 @@ typedef struct {
 
 void menu();
 
+void clearBuffer();
+
 int cadastrarCliente(Clientes *listas, Conta *contas);
 
 int apagarCliente(Clientes *t);
