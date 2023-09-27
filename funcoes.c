@@ -25,6 +25,20 @@ void clearBuffer() {
     ;
 }
 
+// Função que retorna a taxa de transação e o valor negativo de cada tipo de conta
+int tipoConta(char tipo){
+    int taxa, negativo;
+    if (tipo == 1){
+        taxa = 5;
+        negativo = 1000;
+    }
+    else if (tipo == 2){
+        taxa = 3;
+        negativo = 5000;
+    }
+    return taxa, negativo;
+}
+
 // Função para cadastrar cada cliente
 int cadastrarCliente(Clientes *listas, Conta *contas){
     printf("Cadastrar cliente:\n");
@@ -32,49 +46,59 @@ int cadastrarCliente(Clientes *listas, Conta *contas){
     char nome[100];
     printf("Digite o nome do cliente: ");
     scanf("%s", nome);
+    clearBuffer();
 
     // Verifica se o nome contém apenas letras
     while (strspn(nome, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") != strlen(nome)) {
         printf("Nome inválido. O nome deve conter apenas letras: ");
         scanf("%s", nome);
+        clearBuffer();
     }
 
     char cpf[12]; // Incluindo espaço para o caractere nulo '\0'
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
+    clearBuffer();
 
     // Validar que o CPF informado tem 11 dígitos
     while (strlen(cpf) != 11) {
         printf("CPF inválido. Informe um CPF com 11 dígitos: ");
         scanf("%s", cpf);
+        clearBuffer();
     }
 
     char senha[7]; // Incluindo espaço para o caractere nulo '\0'
     printf("Digite a senha do cliente: ");
     scanf("%s", senha);
+    clearBuffer();
 
     // Validar que a senha informada tem 6 dígitos
     while (strlen(senha) != 6) {
         printf("Senha inválida. Informe uma senha com seis dígitos numéricos: ");
         scanf("%s", senha);
+        clearBuffer();
     }
 
     int tipo;
     printf("Escolha o tipo de conta (1 - Comum, 2 - Plus): ");
     scanf("%d", &tipo);
+    clearBuffer();
 
     while (tipo != 1 && tipo != 2) {
         printf("Tipo de conta inválido. Escolha 1 para conta comum ou 2 para conta plus: ");
         scanf("%d", &tipo);
+        clearBuffer();
     }
 
     float saldo;
     printf("Digite o saldo inicial: ");
     scanf("%f", &saldo);
+    clearBuffer();
 
     while (saldo < 0) {
         printf("Saldo inválido. Informe um valor maior ou igual a zero: ");
         scanf("%f", &saldo);
+        clearBuffer();
     }
 
     // Adicionar o cliente à lista de contas
@@ -89,10 +113,12 @@ int apagarCliente(Clientes *t){
     char cpf[12]; // Incluindo espaço para o caractere nulo '\0'
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
-
+    clearBuffer();
+    
     char opcao;
     printf("Você tem certeza que deseja apagar o cliente? (s/n): ");
     scanf(" %c", &opcao);
+    clearBuffer();
 
     if (opcao == 's' || opcao == 'S') {
         //  falta a lógica para apagar o cliente
@@ -115,10 +141,12 @@ int debito(Clientes *t){
     printf("Débito:\n");
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
+    clearBuffer();
 
     char senha[7]; // Incluindo espaço para o caractere nulo '\0'
     printf("Digite a senha do cliente: ");
     scanf("%s", senha);
+    clearBuffer();
 
     //  falta a lógica para realizar o débito
 
@@ -131,10 +159,12 @@ int deposito(Clientes *t){
     printf("Depósito:\n");
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
+    clearBuffer();
 
     float valor;
     printf("Digite o valor do depósito: ");
     scanf("%f", &valor);
+    clearBuffer();
 
     //  falta a para realizar o depósito
 
@@ -149,9 +179,11 @@ int extrato(Clientes t){
     printf("Extrato:\n");
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
+    clearBuffer();
 
     printf("Digite a senha do cliente: ");
     scanf("%s", senha);
+    clearBuffer();
 
     // TODO: Implementar a lógica para gerar o extrato
 
@@ -168,33 +200,23 @@ int transferencia(Clientes *t){
     printf("Transferência:\n");
     printf("Digite o CPF da conta de origem: ");
     scanf("%s", cpfOrigem);
+    clearBuffer();
 
     printf("Digite a senha da conta de origem: ");
     scanf("%s", senha);
+    clearBuffer();
 
     printf("Digite o CPF da conta de destino: ");
     scanf("%s", cpfDestino);
+    clearBuffer();
 
     printf("Digite o valor da transferência: ");
     scanf("%f", &valor);
+    clearBuffer();
 
     // falta a lógica para realizar a transferência
 
     return 0;
-}
-
-// Função que retorna a taxa de transação e o valor negativo de cada tipo de conta
-int tipoConta(char tipo){
-    int taxa, negativo;
-    if (tipo == 1){
-        taxa = 5;
-        negativo = 1000;
-    }
-    else if (tipo == 2){
-        taxa = 3;
-        negativo = 5000;
-    }
-    return taxa, negativo;
 }
 
 // Salva os clientes em um arquivo
