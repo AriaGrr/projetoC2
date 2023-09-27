@@ -1,4 +1,5 @@
 Neste projeto iremos desenvolver um sistema em C que controla os clientes para um banco ficticio chamado QuemPoupaTem.
+
 Há duas versões do programa em branches diferentes, uma para ser executada no replit (branch: replit) e outra para ser rodada no windows (branch: main).
 
 Os requisitos do programa são: 
