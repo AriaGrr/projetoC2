@@ -22,7 +22,7 @@ void menu(){
 void clearBuffer() {
     char c;
     while ((c = getchar()) != '\n' && c != EOF) 
-    ;
+        ;
 }
 
 // Função que retorna a taxa de transação e o valor negativo de cada tipo de conta
