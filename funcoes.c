@@ -143,7 +143,42 @@ int apagarCliente(Clientes *t){
 // Lista todos os clientes cadastrados divididos por tipo de conta
 int listarClientes(Clientes t){
     printf("Lista de clientes:\n");
+    printf("Total de clientes cadastrados: %d\n", t.qtd);
+    printf("\n");
+
+    if(t.qtd == 0){
+        printf("Não há clientes cadastrados.\n");
+    }
+    else{
+        printf("Clientes com conta comum:\n");
+        for (int i = 0; i < t.qtd; i++) {
+            if (t.contas[i].tipo == 1) {
+                printf("Nome: %s\n", t.contas[i].nome);
+                printf("CPF: %s\n", t.contas[i].cpf);
+                printf("Tipo: %d\n", t.contas[i].tipo);
+                printf("Saldo: %.2f\n", t.contas[i].saldo);
+                printf("\n");
+            }
+        }
+        printf("Clientes com conta plus:\n");
+        for (int i = 0; i < t.qtd; i++) {
+            if (t.contas[i].tipo == 2) {
+                printf("Nome: %s\n", t.contas[i].nome);
+                printf("CPF: %s\n", t.contas[i].cpf);
+                printf("Tipo: %d\n", t.contas[i].tipo);
+                printf("Saldo: %.2f\n", t.contas[i].saldo);
+                printf("\n");
+            }
+        }
+    }
     //  falta a lógica para listar os clientes
+    // for (int i = 0; i < t.qtd; i++) {
+    //     printf("Nome: %s\n", t.contas[i].nome);
+    //     printf("CPF: %s\n", t.contas[i].cpf);
+    //     printf("Tipo: %d\n", t.contas[i].tipo);
+    //     printf("Saldo: %.2f\n", t.contas[i].saldo);
+    //     printf("\n");
+    // }    
     return 0;
 }
 
