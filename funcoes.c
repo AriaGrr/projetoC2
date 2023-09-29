@@ -231,6 +231,10 @@ int salvar(Clientes t, char nome[]) {
     }
 
     // TODO: Implementar a lógica para salvar as contas no arquivo
+    for (int i = 0; i < t.qtd; i++) {
+        fwrite(&t.contas[i], sizeof(Conta), 1, arquivo);
+    }
+    //
 
     fclose(arquivo);
     return 0;
@@ -238,7 +242,7 @@ int salvar(Clientes t, char nome[]) {
 
   // Carrega os clientes de um arquivo
 // fread
-int carregar(Clientes *contas, char nome[]) {
+int carregar(Clientes *t, char nome[]) {
     FILE *arquivo;
     arquivo = fopen(nome, "rb");
 
@@ -247,23 +251,11 @@ int carregar(Clientes *contas, char nome[]) {
         return 1;
     }
 
-    // Declara a variável t
-    Clientes *t = contas;
+    t->qtd = 0;
     
-    // Lê a quantidade de contas do arquivo
-    fread(&t->qtd, sizeof(size_t), 1, arquivo);
-
-    // Aloca memória para o array de contas
-    t->contas = (Conta *)malloc(t->qtd * sizeof(Conta));
-
-    if (t->contas == NULL) {
-        printf("Erro ao alocar memória.\n");
-        fclose(arquivo);
-        return 1;
+    while (fread(&t->contas[t->qtd], sizeof(Conta), 1, arquivo) == 1) {
+        t->qtd++;
     }
-
-    // Lê as contas do arquivo
-    fread(t->contas, sizeof(Conta), t->qtd, arquivo);
 
     fclose(arquivo);
     return 0;

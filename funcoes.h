@@ -4,7 +4,7 @@
 // Gera um arquivo com o histórico de todas as operações realizadas na conta, com datas e valores, incluindo as tarifas.
 typedef struct {
   double valor;
-  double taxa
+  double taxa;
   char descricao[100];
 } Operacao;
 
@@ -27,7 +27,7 @@ typedef struct {
   //  Conta *contas;
 
   // Lista de contas
-  struct Conta contas[1000];
+  Conta contas[1000];
   size_t qtd;
 } Clientes;
 
