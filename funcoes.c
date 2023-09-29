@@ -44,18 +44,6 @@ int cadastrarCliente(Clientes *t){
     if (t->qtd < 1000) {
         printf("Cadastrar cliente:\n");
 
-        char nome[100];
-        printf("Digite o nome do cliente: ");
-        scanf("%s", nome);
-        clearBuffer();
-
-        // Verifica se o nome contém apenas letras
-        while (strspn(nome, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") != strlen(nome)) {
-            printf("Nome inválido. O nome deve conter apenas letras: ");
-            scanf("%s", nome);
-            clearBuffer();
-        }
-
         char cpf[12]; // Incluindo espaço para o caractere nulo '\0'
         printf("Digite o CPF do cliente: ");
         scanf("%s", cpf);
@@ -65,6 +53,26 @@ int cadastrarCliente(Clientes *t){
         while (strlen(cpf) != 11) {
             printf("CPF inválido. Informe um CPF com 11 dígitos: ");
             scanf("%s", cpf);
+            clearBuffer();
+        }
+
+        // Verificar se cpf já está cadastrado
+        for (int i = 0; i < t->qtd; i++) {
+            if (strcmp(t->contas[i].cpf, cpf) == 0) {
+                printf("CPF já cadastrado.\n");
+                return 1;
+            }
+        }
+
+        char nome[100];
+        printf("Digite o nome do cliente: ");
+        scanf("%s", nome);
+        clearBuffer();
+
+        // Verifica se o nome contém apenas letras
+        while (strspn(nome, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") != strlen(nome)) {
+            printf("Nome inválido. O nome deve conter apenas letras: ");
+            scanf("%s", nome);
             clearBuffer();
         }
 
@@ -96,11 +104,16 @@ int cadastrarCliente(Clientes *t){
         scanf("%f", &saldo);
         clearBuffer();
 
+        // Verifica se o saldo contém apenas números
+
+        // Verifica se o saldo é maior ou igual a zero
         while (saldo < 0) {
             printf("Saldo inválido. Informe um valor maior ou igual a zero: ");
             scanf("%f", &saldo);
             clearBuffer();
         }
+
+        
         
     // Adicionar o cliente à lista de contas
     t->contas[t->qtd].saldo = saldo;
@@ -231,7 +244,7 @@ int extrato(Clientes t){
     scanf("%s", senha);
     clearBuffer();
 
-    // TODO: Implementar a lógica para gerar o extrato
+    // TODO: Implementar a lógica para gerar o extrato em txt
 
     return 0;
 }
