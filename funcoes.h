@@ -35,7 +35,7 @@ void menu();
 
 void clearBuffer();
 
-int cadastrarCliente(Clientes *listas, Conta *contas);
+int cadastrarCliente(Clientes *t);
 
 int apagarCliente(Clientes *t);
 
