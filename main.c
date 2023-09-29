@@ -30,7 +30,7 @@ int main() {
             printf("Saindo...\n");
         }
         else if (opcao == 1) {
-            cadastrarCliente(&t, ponteiro_para_contas);
+            cadastrarCliente(&t);
             system("clear");
         }
         else if (opcao == 2) {
