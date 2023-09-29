@@ -1,4 +1,4 @@
-Neste projeto iremos desenvolver um sistema em C que controla os clientes para um banco ficticio chamado QuemPoupaTem.
+**Neste projeto iremos desenvolver um sistema em C que controla os clientes para um banco ficticio chamado QuemPoupaTem.**
 
 Há duas versões do programa em branches diferentes, uma para ser executada no replit (branch: replit) e outra para ser rodada no windows (branch: main).
 
@@ -10,8 +10,8 @@ Permite um saldo negativo de até (R$ 1.000,00)
 Plus:
 Cobra taxa de 3% a cada débito realizado
 Permite um saldo negativo de até (R$ 5.000,00)
-O sistema criado por você deve funcionar em loop infinito até que se deseje sair;
-Um menu de opções deve ser sempre apresentado ao operador, contendo as seguintes operações:
+**O sistema criado por você deve funcionar em loop infinito até que se deseje sair;
+Um menu de opções deve ser sempre apresentado ao operador, contendo as seguintes operações:**
 1. Novo cliente
 
 2. Apaga cliente
@@ -30,12 +30,12 @@ Um menu de opções deve ser sempre apresentado ao operador, contendo as seguint
 
 Cada opção deve ser implementada como uma função;
 
-O seu programa deve conseguir armazenar até 1000 clientes e as informações das últimas 100 operações (depósito, saque, transferência) realizada pelo cliente
+**O seu programa deve conseguir armazenar até 1000 clientes e as informações das últimas 100 operações (depósito, saque, transferência) realizada pelo cliente**
 
-IMPORTANTE: Não se esqueça de que o banco não pode perder as informações se o programa terminar, fechar, parar de funcionar, ou o computador desligar. Todos os dados devem ser salvos de maneira permanente utilizando arquivos binários.
+**IMPORTANTE: Não se esqueça de que o banco não pode perder as informações se o programa terminar, fechar, parar de funcionar, ou o computador desligar. Todos os dados devem ser salvos de maneira permanente utilizando arquivos binários.**
 
 
-Funções
+**Funções**
 
 Opção 1 - Usada para criar novos clientes.
 Dados solicitados:
