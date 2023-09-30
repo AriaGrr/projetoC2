@@ -1,0 +1,82 @@
+// Função para cadastrar cada cliente
+int cadastrarCliente(Clientes *t){
+    if (t->qtd < 1000) {
+        printf("Cadastrar cliente:\n");
+
+        char nome[100];
+        printf("Digite o nome do cliente: ");
+        scanf("%s", nome);
+        clearBuffer();
+
+        // Verifica se o nome contém apenas letras
+        while (strspn(nome, "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ") != strlen(nome)) {
+            printf("Nome inválido. O nome deve conter apenas letras: ");
+            scanf("%s", nome);
+            clearBuffer();
+        }
+
+        char cpf[12]; // Incluindo espaço para o caractere nulo '\0'
+        printf("Digite o CPF do cliente: ");
+        scanf("%s", cpf);
+        clearBuffer();
+
+        // Validar que o CPF informado tem 11 dígitos
+        while (strlen(cpf) != 11) {
+            printf("CPF inválido. Informe um CPF com 11 dígitos: ");
+            scanf("%s", cpf);
+            clearBuffer();
+        }
+
+        char senha[7]; // Incluindo espaço para o caractere nulo '\0'
+        printf("Digite a senha do cliente: ");
+        scanf("%s", senha);
+        clearBuffer();
+
+        // Validar que a senha informada tem 6 dígitos
+        while (strlen(senha) != 6) {
+            printf("Senha inválida. Informe uma senha com seis dígitos numéricos: ");
+            scanf("%s", senha);
+            clearBuffer();
+        }
+
+         int tipo;
+        printf("Escolha o tipo de conta (1 - Comum, 2 - Plus): ");
+        scanf("%d", &tipo);
+        clearBuffer();
+
+        while (tipo != 1 && tipo != 2) {
+            printf("Tipo de conta inválido. Escolha 1 para conta comum ou 2 para conta plus: ");
+            scanf("%d", &tipo);
+            clearBuffer();
+        }
+
+        // Variáveis para armazenar a taxa e o valor negativo
+        int taxa, negativo;
+        tipoConta(tipo, &taxa, &negativo);
+
+        float saldo;
+        printf("Digite o saldo inicial: ");
+        scanf("%f", &saldo);
+        clearBuffer();
+
+        while (saldo < 0) {
+            printf("Saldo inválido. Informe um valor maior ou igual a zero: ");
+            scanf("%f", &saldo);
+            clearBuffer();
+        }
+
+        // Adicionar o cliente à lista de contas
+        t->contas[t->qtd].saldo = saldo;
+        strcpy(t->contas[t->qtd].nome, nome);
+        strcpy(t->contas[t->qtd].cpf, cpf);
+        strcpy(t->contas[t->qtd].senha, senha);
+        t->contas[t->qtd].tipo = tipo;
+        t->qtd++;
+
+        
+    } else {
+        printf("Não é possível cadastrar mais clientes.\n");
+    }
+
+    return 0;
+}
