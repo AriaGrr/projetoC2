@@ -7,12 +7,8 @@ int main() {
     char arquivo[] = "clientes";
     Clientes t;
 
-    // Criando uma estrutura Conta e um ponteiro para ela
-    Conta conta; // Declaração de uma variável do tipo Conta
-    Conta *ponteiro_para_contas; // Declaração de um ponteiro para Conta
-
-    // Atribuindo o endereço da variável conta ao ponteiro ponteiro_para_contas
-    ponteiro_para_contas = &conta;
+    // Inicializando a variável t
+    t.qtd = 0;
 
     cod = carregar(&t, arquivo);
     if (cod == 1) {
@@ -30,7 +26,14 @@ int main() {
             printf("Saindo...\n");
         }
         else if (opcao == 1) {
-            cadastrarCliente(&t, ponteiro_para_contas);
+            // Fixo:
+            // - Verifique se o número de clientes já atingiu o limite
+            if (t.qtd == 1000) {
+                printf("Limite de clientes atingido.\n");
+                continue;
+            }
+
+            cadastrarCliente(&t);
             system("clear");
         }
         else if (opcao == 2) {
