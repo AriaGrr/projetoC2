@@ -4,21 +4,21 @@
 // Gera um arquivo com o histórico de todas as operações realizadas na conta, com datas e valores, incluindo as tarifas.
 typedef struct {
   double valor;
-  double taxa
+  double taxa;
   char descricao[100];
 } Operacao;
 
 // Struct com os dados de cada conta
 typedef struct {
   char nome[100];
-  char cpf[11];
-  char senha[6];
+  char cpf[12];
+  char senha[7];
   int tipo;
   float saldo;
   struct operacao *extrato[100];
 } Conta;
 
-// cs[0].extrato[0].valor
+
 
 // Struct com os dados de cada cliente
 typedef struct {
@@ -27,7 +27,7 @@ typedef struct {
   //  Conta *contas;
 
   // Lista de contas
-  struct Conta contas[1000];
+  Conta contas[1000];
   size_t qtd;
 } Clientes;
 
@@ -35,7 +35,7 @@ void menu();
 
 void clearBuffer();
 
-int cadastrarCliente(Clientes *listas, Conta *contas);
+int cadastrarCliente(Clientes *t);
 
 int apagarCliente(Clientes *t);
 
@@ -48,9 +48,10 @@ int deposito(Clientes *t);
 //Struct com os extratos?
 int extrato(Clientes t);
 
+
 int transferencia(Clientes *t);
 
-int tipoConta(char tipo);
+int tipoDeConta(char tipo);
 
 // fwrite
 int salvar(Clientes t, char nome[]);
