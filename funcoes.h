@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 // Struct com os extratos de cada conta
 // Gera um arquivo com o histórico de todas as operações realizadas na conta, com datas e valores, incluindo as tarifas.
@@ -15,7 +16,7 @@ typedef struct {
   char senha[6];
   int tipo;
   double saldo;
-  struct operacao *extrato[100];
+  Operacao extrato[100];
 } Conta;
 
 // cs[0].extrato[0].valor
@@ -34,6 +35,10 @@ typedef struct {
 void menu();
 
 bool validarCPF(char cpf[]);
+
+bool validarSenha(char senha[]);
+
+int lerTecla();
 
 void clearBuffer();
 
