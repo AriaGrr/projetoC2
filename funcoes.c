@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
-#include <time.h>
-#include <conio.h>
-#include <ctype.h>
+// #include <time.h>
+// #include <conio.h>
+// #include <ctype.h>
 #include "funcoes.h"
 
 // Função que imprime o menu principal
@@ -30,8 +30,8 @@ void clearBuffer() {
 int lerTecla() {
   char tecla;
 
-  // Captura a tecla pressionada pelo usuário.
-  tecla = getch();
+  // Captura a tecla pressionada pelo usuário. getch ou getchar?
+  tecla = getchar();
 
   // Se a tecla pressionada for esc, retorna 1.
   if (tecla == 27)
@@ -48,11 +48,15 @@ bool validarCPF(char cpf[]){
   if (strlen(cpf) != 11)
     return false;
 
-  // Verifica se cada caractere do CPF é um dígito.
-  for (i = 0; i < strlen(cpf); i++) {
-    if (!isdigit(cpf[i]))
-      return false;
-  }
+//   // Verifica se cada caractere do CPF é um dígito.
+//   for (i = 0; i < strlen(cpf); i++) {
+//     if (!isdigit(cpf[i]))
+//       return false;
+//   }
+
+        if (strspn(cpf, "1234567890") != strlen(cpf)) {
+            return false;   
+        }
 
   return true;
 }
@@ -64,12 +68,14 @@ bool validarSenha(char senha[]) {
   if (strlen(senha) != 6)
     return false;
 
-  // Verifica se cada caractere da senha é um dígito.
-  for (i = 0; i < strlen(senha); i++) {
-    if (!isdigit(senha[i]))
-      return false;
-  }
-
+//   // Verifica se cada caractere da senha é um dígito.
+//   for (i = 0; i < strlen(senha); i++) {
+//     if (!isdigit(senha[i]))
+//       return false;
+//   }
+        if (strspn(senha, "1234567890") != strlen(senha)) {
+            return false;   
+        }
   return true;
 }
 
