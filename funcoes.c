@@ -25,6 +25,22 @@ void clearBuffer() {
         ;
 }
 
+// Função das validações de CPF
+bool validarCPF(char cpf[]){
+  int i;
+  // Verifica se o CPF tem 11 dígitos.
+  if (strlen(cpf) != 11)
+    return false;
+
+  // Verifica se cada caractere do CPF é um dígito.
+  for (i = 0; i < strlen(cpf); i++) {
+    if (!isdigit(cpf[i]))
+      return false;
+  }
+
+  return true;
+}
+
 // Função que retorna a taxa de transação e o valor negativo de cada tipo de conta
 int tipoConta(char tipo){
     int taxa, negativo;
@@ -49,9 +65,14 @@ int cadastrarCliente(Clientes *t){
         scanf("%s", cpf);
         clearBuffer();
 
-        // Validar que o CPF informado tem 11 dígitos
-        while (strlen(cpf) != 11) {
-            printf("CPF inválido. Informe um CPF com 11 dígitos: ");
+        // // Validar que o CPF informado tem 11 dígitos
+        // while (strlen(cpf) != 11) {
+        //     printf("CPF inválido. Informe um CPF com 11 dígitos: ");
+        //     scanf("%s", cpf);
+        //     clearBuffer();
+        // }
+        while (!validarCPF(cpf)) {
+            printf("CPF inválido. Informe um CPF com 11 dígitos númericos: ");
             scanf("%s", cpf);
             clearBuffer();
         }
@@ -112,8 +133,6 @@ int cadastrarCliente(Clientes *t){
             scanf("%f", &saldo);
             clearBuffer();
         }
-
-        
         
     // Adicionar o cliente à lista de contas
     t->contas[t->qtd].saldo = saldo;
@@ -136,20 +155,39 @@ int apagarCliente(Clientes *t){
     printf("Apagar cliente:\n");
     char cpf[12]; // Incluindo espaço para o caractere nulo '\0'
     printf("Digite o CPF do cliente: ");
+    clearBuffer();
     scanf("%s", cpf);
     clearBuffer();
-    
-    char opcao;
-    printf("Você tem certeza que deseja apagar o cliente? (s/n): ");
-    scanf(" %c", &opcao);
-    clearBuffer();
 
-    if (opcao == 's' || opcao == 'S') {
-        //  falta a lógica para apagar o cliente
-        printf("Cliente apagado com sucesso!\n");
-    } else {
-        printf("Operação cancelada.\n");
+    while (strlen(cpf) != 11) {
+        printf("CPF inválido. Informe um CPF com 11 dígitos: ");
+        scanf("%s", cpf);
+        clearBuffer();
     }
+
+        // Verificar se cpf está cadastrado 
+        for (int i = 0; i < t->qtd; i++) {
+            if (strcmp(t->contas[i].cpf, cpf) == 0) {
+                char opcao;
+                printf("Você tem certeza que deseja apagar o cliente? (s/n): ");
+                scanf(" %c", &opcao);
+                clearBuffer();
+
+                if (opcao == 's' || opcao == 'S') {
+                    //  Lógica para apagar o cliente
+                    t->contas[i] = t->contas[t->qtd - 1];
+                    t->qtd--;
+                    //
+                    printf("Cliente apagado com sucesso!\n");
+                } else {
+                    printf("Operação cancelada.\n");
+                }
+            } else {
+            printf("CPF não encontrado.\n");
+            return 1;
+        }
+    }
+    
     return 0;
 }
 
@@ -169,7 +207,7 @@ int listarClientes(Clientes t){
                 printf("Nome: %s\n", t.contas[i].nome);
                 printf("CPF: %s\n", t.contas[i].cpf);
                 printf("Tipo: %d\n", t.contas[i].tipo);
-                printf("Saldo: %.2f\n", t.contas[i].saldo);
+                printf("Saldo: %.2lf\n", t.contas[i].saldo);
                 printf("\n");
             }
         }
@@ -179,12 +217,12 @@ int listarClientes(Clientes t){
                 printf("Nome: %s\n", t.contas[i].nome);
                 printf("CPF: %s\n", t.contas[i].cpf);
                 printf("Tipo: %d\n", t.contas[i].tipo);
-                printf("Saldo: %.2f\n", t.contas[i].saldo);
+                printf("Saldo: %.2lf\n", t.contas[i].saldo);
                 printf("\n");
             }
         }
     }
-    //  falta a lógica para listar os clientes
+    // lógica para listar os clientes
     // for (int i = 0; i < t.qtd; i++) {
     //     printf("Nome: %s\n", t.contas[i].nome);
     //     printf("CPF: %s\n", t.contas[i].cpf);
@@ -225,7 +263,7 @@ int deposito(Clientes *t){
     scanf("%f", &valor);
     clearBuffer();
 
-    //  falta a para realizar o depósito
+    //  falta a lógica para realizar o depósito
 
     return 0;
 }
@@ -261,6 +299,12 @@ int transferencia(Clientes *t){
     scanf("%s", cpfOrigem);
     clearBuffer();
 
+        while (!validarCPF(cpfOrigem)) {
+            printf("CPF inválido. Informe um CPF com 11 dígitos númericos: ");
+            scanf("%s", cpfOrigem);
+            clearBuffer();
+        }
+
     printf("Digite a senha da conta de origem: ");
     scanf("%s", senha);
     clearBuffer();
@@ -268,6 +312,11 @@ int transferencia(Clientes *t){
     printf("Digite o CPF da conta de destino: ");
     scanf("%s", cpfDestino);
     clearBuffer();
+        while (!validarCPF(cpfDestino)) {
+            printf("CPF inválido. Informe um CPF com 11 dígitos númericos: ");
+            scanf("%s", cpfDestino);
+            clearBuffer();
+        }
 
     printf("Digite o valor da transferência: ");
     scanf("%f", &valor);
@@ -289,7 +338,7 @@ int salvar(Clientes t, char nome[]) {
         return 1;
     }
 
-    // TODO: Implementar a lógica para salvar as contas no arquivo
+    // Lógica para salvar as contas no arquivo
     for (int i = 0; i < t.qtd; i++) {
         fwrite(&t.contas[i], sizeof(Conta), 1, arquivo);
     }

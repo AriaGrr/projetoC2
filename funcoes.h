@@ -14,7 +14,7 @@ typedef struct {
   char cpf[11];
   char senha[6];
   int tipo;
-  float saldo;
+  double saldo;
   struct operacao *extrato[100];
 } Conta;
 
@@ -32,6 +32,8 @@ typedef struct {
 } Clientes;
 
 void menu();
+
+bool validarCPF(char cpf[]);
 
 void clearBuffer();
 
