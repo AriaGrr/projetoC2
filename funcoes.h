@@ -52,7 +52,6 @@ int debito(Clientes *t);
 
 int deposito(Clientes *t);
 
-//Struct com os extratos?
 int extrato(Clientes t);
 
 int transferencia(Clientes *t);

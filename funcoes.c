@@ -3,6 +3,8 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#include <conio.h>
+#include <ctype.h>
 #include "funcoes.h"
 
 // Função que imprime o menu principal
@@ -71,7 +73,7 @@ bool validarSenha(char senha[]) {
   return true;
 }
 
-// Função para verificar se o char é um número
+// Função para verificar se o char é um número?
 
 // Função que retorna a taxa de transação e o valor negativo de cada tipo de conta
 int tipoConta(char tipo){
@@ -420,7 +422,7 @@ while (lerTecla() != 1) {
         // Verifica se o arquivo foi aberto com sucesso
         if (arquivo == NULL) {
             printf("Erro ao abrir o arquivo.\n");
-            return;
+            return 1;
         }
         // Escreve o cabeçalho do arquivo
         fprintf(arquivo, "Data | Valor | Taxa | Descrição\n");
