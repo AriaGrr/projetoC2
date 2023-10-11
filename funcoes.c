@@ -3,6 +3,7 @@
 #include <string.h>
 #include <stdbool.h>
 #include <time.h>
+#include <ctype.h>
 #include "funcoes.h"
 
 // Função que imprime o menu principal
