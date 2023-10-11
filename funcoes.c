@@ -194,7 +194,7 @@ int apagarCliente(Clientes *t){
 // Lista todos os clientes cadastrados divididos por tipo de conta
 int listarClientes(Clientes t){
     printf("Lista de clientes:\n");
-    printf("Total de clientes cadastrados: %d\n", t.qtd);
+    printf("Total de clientes cadastrados: %ld\n", t.qtd);
     printf("\n");
 
     if(t.qtd == 0){
