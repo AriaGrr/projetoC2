@@ -225,59 +225,137 @@ int listarClientes(Clientes t) {
     }
 }
 
-int debito(Clientes *t){
-    char cpf[12]; // Incluindo espaço para o caractere nulo '\0'
+int debito(Clientes *t) {
+    char cpf[12];
     printf("Débito:\n");
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
     clearBuffer();
 
-    char senha[7]; // Incluindo espaço para o caractere nulo '\0'
+    // Validar que o CPF tem 11 dígitos numéricos
+    while (strlen(cpf) != 11 || !validarCPF(cpf)) {
+        printf("CPF inválido. Informe um CPF com 11 dígitos numéricos: ");
+        scanf("%s", cpf);
+        clearBuffer();
+    }
+
+    char senha[7];
     printf("Digite a senha do cliente: ");
     scanf("%s", senha);
     clearBuffer();
 
-    //  falta a lógica para realizar o débito
+    int index = -1;
+    for (int i = 0; i < t->qtd; i++) {
+        if (strcmp(t->contas[i].cpf, cpf) == 0) {
+            index = i;
+            break;
+        }
+    }
 
+    if (index == -1) {
+        printf("Conta não encontrada.\n");
+        return 1;
+    }
+
+    if (strcmp(t->contas[index].senha, senha) != 0) {
+        printf("Senha incorreta.\n");
+        return 1;
+    }
+
+    float valor;
+    printf("Digite o valor do débito: ");
+    scanf("%f", &valor);
+    clearBuffer();
+
+    if (t->contas[index].saldo < valor) {
+        printf("Saldo insuficiente.\n");
+        return 1;
+    }
+
+    t->contas[index].saldo -= valor;
+    printf("Débito realizado com sucesso. Novo saldo: %.2lf\n", t->contas[index].saldo);
     return 0;
 }
 
-// Deposito - realiza o depósito de um valor determinado em uma conta
-int deposito(Clientes *t){
-    char cpf[12]; // Incluindo espaço para o caractere nulo '\0'
+
+int deposito(Clientes *t) {
+    char cpf[12];
     printf("Depósito:\n");
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
     clearBuffer();
+
+    int index = -1;
+    for (int i = 0; i < t->qtd; i++) {
+        if (strcmp(t->contas[i].cpf, cpf) == 0) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1) {
+        printf("Conta não encontrada.\n");
+        return 1;
+    }
 
     float valor;
     printf("Digite o valor do depósito: ");
     scanf("%f", &valor);
     clearBuffer();
 
-    //  falta a lógica para realizar o depósito
+    if (valor <= 0) {
+        printf("Valor de depósito inválido.\n");
+        return 1;
+    }
 
+    t->contas[index].saldo += valor;
+    printf("Depósito realizado com sucesso. Novo saldo: %.2lf\n", t->contas[index].saldo);
     return 0;
 }
 
-// Extrato - gera um arquivo com o histórico de todas as operações realizadas na conta, com datas e valores, incluindo as tarifas.
-int extrato(Clientes t){
-    char cpf[12]; // Incluindo espaço para o caractere nulo '\0'
-    char senha[7]; // Incluindo espaço para o caractere nulo '\0'
 
+// Extrato - gera um arquivo com o histórico de todas as operações realizadas na conta, com datas e valores, incluindo as tarifas.
+int extrato(Clientes t) {
+    char cpf[12];
+    char senha[7];
     printf("Extrato:\n");
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
     clearBuffer();
 
+    int index = -1;
+    for (int i = 0; i < t.qtd; i++) {
+        if (strcmp(t.contas[i].cpf, cpf) == 0) {
+            index = i;
+            break;
+        }
+    }
+
+    if (index == -1) {
+        printf("Conta não encontrada.\n");
+        return 1;
+    }
+
     printf("Digite a senha do cliente: ");
     scanf("%s", senha);
     clearBuffer();
 
-    // TODO: Implementar a lógica para gerar o extrato em txt
+    if (strcmp(t.contas[index].senha, senha) != 0) {
+        printf("Senha incorreta.\n");
+        return 1;
+    }
 
+    // Lógica para gerar o extrato em um arquivo de texto (arquivo.txt, por exemplo)
+    FILE *extratoFile = fopen("extrato.txt", "w");
+    fprintf(extratoFile, "Extrato da conta de %s\n", t.contas[index].nome);
+    // Aqui, você pode adicionar mais informações ao extrato, como datas e operações.
+    fprintf(extratoFile, "Saldo atual: %.2lf\n", t.contas[index].saldo);
+    fclose(extratoFile);
+
+    printf("Extrato gerado com sucesso.\n");
     return 0;
 }
+
 
 // Transferência - realiza a transferência de um valor determinado de uma conta (Origem) para outra conta (Destino)
 int transferencia(Clientes *t){
