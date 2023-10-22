@@ -224,7 +224,7 @@ int listarClientes(Clientes t) {
         }
     }
 }
-
+// a o a semha e cpf estao apecendo juntos?? tem que arramar// mudar esse tipo conta == 1 ou 2 para o nome conta comum ou conta plus
 int debito(Clientes *t) {
     char cpf[12];
     printf("Débito:\n");
@@ -348,7 +348,7 @@ int extrato(Clientes t) {
     // Lógica para gerar o extrato em um arquivo de texto (arquivo.txt, por exemplo)
     FILE *extratoFile = fopen("extrato.txt", "w");
     fprintf(extratoFile, "Extrato da conta de %s\n", t.contas[index].nome);
-    // Aqui, você pode adicionar mais informações ao extrato, como datas e operações.
+    // adicionar mais informações ao extrato, como datas e operações.  incluindo as tarifas. CPF e senha??
     fprintf(extratoFile, "Saldo atual: %.2lf\n", t.contas[index].saldo);
     fclose(extratoFile);
 
@@ -358,41 +358,75 @@ int extrato(Clientes t) {
 
 
 // Transferência - realiza a transferência de um valor determinado de uma conta (Origem) para outra conta (Destino)
-int transferencia(Clientes *t){
-    char cpfOrigem[12]; // Incluindo espaço para o caractere nulo '\0'
-    char senha[7]; // Incluindo espaço para o caractere nulo '\0'
-    char cpfDestino[12]; // Incluindo espaço para o caractere nulo '\0'
+int transferencia(Clientes *t) {
+    char cpfOrigem[12];
+    char senha[7];
+    char cpfDestino[12];
     float valor;
-
     printf("Transferência:\n");
     printf("Digite o CPF da conta de origem: ");
     scanf("%s", cpfOrigem);
     clearBuffer();
 
-        while (!validarCPF(cpfOrigem)) {
-            printf("CPF inválido. Informe um CPF com 11 dígitos númericos: ");
-            scanf("%s", cpfOrigem);
-            clearBuffer();
+    int indexOrigem = -1;
+    for (int i = 0; i < t->qtd; i++) {
+        if (strcmp(t->contas[i].cpf, cpfOrigem) == 0) {
+            indexOrigem = i;
+            break;
         }
+    }
+
+    if (indexOrigem == -1) {
+        printf("Conta de origem não encontrada.\n");
+        return 1;
+    }
 
     printf("Digite a senha da conta de origem: ");
     scanf("%s", senha);
     clearBuffer();
 
+    if (strcmp(t->contas[indexOrigem].senha, senha) != 0) {
+        printf("Senha incorreta.\n");
+        return 1;
+    }
+
     printf("Digite o CPF da conta de destino: ");
     scanf("%s", cpfDestino);
     clearBuffer();
-        while (!validarCPF(cpfDestino)) {
-            printf("CPF inválido. Informe um CPF com 11 dígitos númericos: ");
-            scanf("%s", cpfDestino);
-            clearBuffer();
+
+    int indexDestino = -1;
+    for (int i = 0; i < t->qtd; i++) {
+        if (strcmp(t->contas[i].cpf, cpfDestino) == 0) {
+            indexDestino = i;
+            break;
         }
+    }
+
+    if (indexDestino == -1) {
+        printf("Conta de destino não encontrada.\n");
+        return 1;
+    }
 
     printf("Digite o valor da transferência: ");
     scanf("%f", &valor);
     clearBuffer();
 
-    // falta a lógica para realizar a transferência
+    if (valor <= 0) {
+        printf("Valor de transferência inválido.\n");
+        return 1;
+    }
+
+    if (t->contas[indexOrigem].saldo < valor) {
+        printf("Saldo insuficiente na conta de origem.\n");
+        return 1;
+    }
+
+    t->contas[indexOrigem].saldo -= valor;
+    t->contas[indexDestino].saldo += valor;
+
+    printf("Transferência realizada com sucesso.\n");
+    printf("Novo saldo da conta de origem: %.2lf\n", t->contas[indexOrigem].saldo);
+    printf("Novo saldo da conta de destino: %.2lf\n", t->contas[indexDestino].saldo);
 
     return 0;
 }
