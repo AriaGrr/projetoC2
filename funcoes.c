@@ -427,7 +427,7 @@ int extrato(Clientes t)
                 return 1;
             }
             // Escreve o cabeçalho do arquivo
-            fprintf(arquivo, "Data | Valor | Taxa | Descrição\n");
+            fprintf(arquivo, "Descrição | Valor | Taxa \n");
 
             int qtd = t.qtd;
             // Aloca memória para um vetor de 2 operações
@@ -435,7 +435,8 @@ int extrato(Clientes t)
 
             // Escreve as transações do extrato
             for (int i = 0; i < qtd; i++) {
-                fprintf(arquivo, "%s | %.2lf | %.2lf | %s\n", extrato[i].descricao, extrato[i].valor, extrato[i].taxa, extrato[i].descricao);
+                fprintf(arquivo, "%s | %.2lf | %.2lf \n", extrato[i].descricao, extrato[i].valor, extrato[i].taxa);
+              printf("%s | %.2lf | %.2lf \n" , extrato[i].descricao, extrato[i].valor, extrato[i].taxa);
             }
 
             // Fecha o arquivo
@@ -449,6 +450,7 @@ int extrato(Clientes t)
         }
             } 
         }
+
      // TODO: Implementar a lógica para gerar o extrato em txt
     
   return 0;
