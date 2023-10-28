@@ -12,11 +12,11 @@ typedef struct {
 // Struct com os dados de cada conta
 typedef struct {
   char nome[100];
-  char cpf[11];
-  char senha[6];
+  char cpf[12];
+  char senha[7];
   int tipo;
   double saldo;
-  struct operacao *extrato[100];
+  Operacao *extrato[100];
 } Conta;
 
 // cs[0].extrato[0].valor
