@@ -219,91 +219,178 @@ int apagarCliente(Clientes *t)
     return 0;
 }
 
-int listarClientes(Clientes t) {
+// Lista todos os clientes cadastrados divididos por tipo de conta
+int listarClientes(Clientes t)
+{
     printf("Lista de clientes:\n");
     printf("Total de clientes cadastrados: %ld\n", t.qtd);
     printf("\n");
 
-    if (t.qtd == 0) {
+    if (t.qtd == 0)
+    {
         printf("Não há clientes cadastrados.\n");
-    } else {
+    }
+    else
+    {
         printf("Clientes com conta comum:\n");
-        for (size_t i = 0; i < t.qtd; i++) {
-            if (t.contas[i].tipo == 1) {
+        for (int i = 0; i < t.qtd; i++)
+        {
+            if (t.contas[i].tipo == 1)
+            {
                 printf("Nome: %s\n", t.contas[i].nome);
                 printf("CPF: %s\n", t.contas[i].cpf);
                 printf("Tipo: %d\n", t.contas[i].tipo);
-                printf("Senha: %s\n", t.contas[i].senha); 
                 printf("Saldo: %.2lf\n", t.contas[i].saldo);
                 printf("\n");
             }
         }
         printf("Clientes com conta plus:\n");
-        for (size_t i = 0; i < t.qtd; i++) {
-            if (t.contas[i].tipo == 2) {
+        for (int i = 0; i < t.qtd; i++)
+        {
+            if (t.contas[i].tipo == 2)
+            {
                 printf("Nome: %s\n", t.contas[i].nome);
                 printf("CPF: %s\n", t.contas[i].cpf);
                 printf("Tipo: %d\n", t.contas[i].tipo);
-                printf("Senha: %s\n", t.contas[i].senha); 
                 printf("Saldo: %.2lf\n", t.contas[i].saldo);
                 printf("\n");
             }
         }
     }
+    // lógica para listar os clientes
+    // for (int i = 0; i < t.qtd; i++) {
+    //     printf("Nome: %s\n", t.contas[i].nome);
+    //     printf("CPF: %s\n", t.contas[i].cpf);
+    //     printf("Tipo: %d\n", t.contas[i].tipo);
+    //     printf("Saldo: %.2f\n", t.contas[i].saldo);
+    //     printf("\n");
+    // }
+    return 0;
 }
 
-int debito(Clientes *t) {
-    char cpf[12];
+// int debito(Clientes *t) {
+//     char cpf[12];
+//     printf("Débito:\n");
+//     printf("Digite o CPF do cliente: ");
+//     scanf("%s", cpf);
+//     clearBuffer();
+
+//     // Validar que o CPF tem 11 dígitos numéricos
+//     while (strlen(cpf) != 11 || !validarCPF(cpf)) {
+//         printf("CPF inválido. Informe um CPF com 11 dígitos numéricos: ");
+//         scanf("%s", cpf);
+//         clearBuffer();
+//     }
+
+//     char senha[7];
+//     printf("Digite a senha do cliente: ");
+//     scanf("%s", senha);
+//     clearBuffer();
+
+//     int index = -1;
+//     for (int i = 0; i < t->qtd; i++) {
+//         if (strcmp(t->contas[i].cpf, cpf) == 0) {
+//             index = i;
+//             break;
+//         }
+//     }
+
+//     if (index == -1) {
+//         printf("Conta não encontrada.\n");
+//         return 1;
+//     }
+
+//     if (strcmp(t->contas[index].senha, senha) != 0) {
+//         printf("Senha incorreta.\n");
+//         return 1;
+//     }
+
+//     float valor;
+//     printf("Digite o valor do débito: ");
+//     scanf("%f", &valor);
+//     clearBuffer();
+
+//     if (t->contas[index].saldo < valor) {
+//         printf("Saldo insuficiente.\n");
+//         return 1;
+//     }
+
+//     t->contas[index].saldo -= valor;
+//     printf("Débito realizado com sucesso. Novo saldo: %.2lf\n", t->contas[index].saldo);
+//     return 0;
+// }
+int debito(Clientes *t)
+{
     printf("Débito:\n");
+    // while (lerTecla() != 1) {
+    char cpf[12]; // Incluindo espaço para o caractere nulo '\0'
     printf("Digite o CPF do cliente: ");
     scanf("%s", cpf);
     clearBuffer();
 
-    // Validar que o CPF tem 11 dígitos numéricos
-    while (strlen(cpf) != 11 || !validarCPF(cpf)) {
-        printf("CPF inválido. Informe um CPF com 11 dígitos numéricos: ");
+    while (!validarCPF(cpf))
+    {
+        printf("CPF inválido. Informe um CPF com 11 dígitos númericos: ");
         scanf("%s", cpf);
         clearBuffer();
     }
 
-    char senha[7];
+    char senha[7]; // Incluindo espaço para o caractere nulo '\0'
     printf("Digite a senha do cliente: ");
     scanf("%s", senha);
     clearBuffer();
 
-    int index = -1;
-    for (int i = 0; i < t->qtd; i++) {
-        if (strcmp(t->contas[i].cpf, cpf) == 0) {
-            index = i;
-            break;
-        }
+    // Validar a senha
+    while (!validarSenha(senha))
+    {
+        printf("Senha inválida. Informe uma senha com 6 dígitos númericos: ");
+        scanf("%s", senha);
+        clearBuffer();
     }
 
-    if (index == -1) {
-        printf("Conta não encontrada.\n");
-        return 1;
-    }
-
-    if (strcmp(t->contas[index].senha, senha) != 0) {
-        printf("Senha incorreta.\n");
-        return 1;
-    }
-
-    float valor;
+    float valor, porcentagem, saldo;
+    int taxa, negativo;
     printf("Digite o valor do débito: ");
     scanf("%f", &valor);
     clearBuffer();
 
-    if (t->contas[index].saldo < valor) {
-        printf("Saldo insuficiente.\n");
-        return 1;
+    while (valor < 0)
+    {
+        printf("Valor inválido. Informe um valor maior que zero: ");
+        scanf("%f", &valor);
+        clearBuffer();
     }
 
-    t->contas[index].saldo -= valor;
-    printf("Débito realizado com sucesso. Novo saldo: %.2lf\n", t->contas[index].saldo);
+    // Lógica para realizar o débito
+    for (int i = 0; i < t->qtd; i++)
+    {
+        if (strcmp(t->contas[i].cpf, cpf) == 0)
+        {
+            taxa, negativo = tipoConta(t->contas[i].tipo);
+            porcentagem = (valor * taxa) / 100;
+            saldo = t->contas[i].saldo - valor - porcentagem;
+            if (saldo < negativo)
+            {
+                printf("Saldo insuficiente.\n");
+                return 1;
+            }
+            else
+            {
+                t->contas[i].saldo -= valor + porcentagem;
+                printf("Débito realizado com sucesso!\n");
+                printf("Novo saldo: %.2lf\n", t->contas[i].saldo);
+                // Salvar no extrato
+                t->contas[i].extrato[t->qtd]->valor = valor;
+                t->contas[i].extrato[t->qtd]->taxa = porcentagem;
+                strcpy(t->contas[i].extrato[t->qtd]->descricao, "Débito");
+                //
+            }
+        }
+    }
+    //
+    // }
     return 0;
 }
-
 
 int deposito(Clientes *t) {
     char cpf[12];
@@ -475,81 +562,131 @@ int extrato(Clientes t)
 }
 
 
-// Transferência - realiza a transferência de um valor determinado de uma conta (Origem) para outra conta (Destino)
-int transferencia(Clientes *t) {
-    char cpfOrigem[12];
-    char senha[7];
-    char cpfDestino[12];
-    float valor;
+
+int transferencia(Clientes *t)
+{
     printf("Transferência:\n");
+
+    // while (lerTecla() != 1) {
+    char cpfOrigem[12];  // Incluindo espaço para o caractere nulo '\0'
+    char senha[7];       // Incluindo espaço para o caractere nulo '\0'
+    char cpfDestino[12]; // Incluindo espaço para o caractere nulo '\0'
+    float valor, porcentagem, saldo;
+    int taxa, negativo;
+
     printf("Digite o CPF da conta de origem: ");
     scanf("%s", cpfOrigem);
     clearBuffer();
 
-    int indexOrigem = -1;
-    for (int i = 0; i < t->qtd; i++) {
-        if (strcmp(t->contas[i].cpf, cpfOrigem) == 0) {
-            indexOrigem = i;
-            break;
+    while (!validarCPF(cpfOrigem))
+    {
+        printf("CPF inválido. Informe um CPF com 11 dígitos númericos: ");
+        scanf("%s", cpfOrigem);
+        clearBuffer();
+    }
+    // Verificar se cpf está cadastrado
+    for (int i = 0; i < t->qtd; i++)
+    {
+        if (strcmp(t->contas[i].cpf, cpfOrigem) == 0)
+        {
+
+            printf("Digite a senha da conta de origem: ");
+            scanf("%s", senha);
+            clearBuffer();
+
+            // Validar a senha
+            while (!validarSenha(senha))
+            {
+                printf("Senha inválida. Informe uma senha com 6 dígitos númericos: ");
+                scanf("%s", senha);
+                clearBuffer();
+            }
+        }
+        else
+        {
+            printf("CPF não encontrado.\n");
+        }
+        if (strcmp(t->contas[i].senha, senha) == 0)
+        {
+            printf("Digite o CPF da conta de destino: ");
+            scanf("%s", cpfDestino);
+            clearBuffer();
+
+            while (!validarCPF(cpfDestino))
+            {
+                printf("CPF inválido. Informe um CPF com 11 dígitos númericos: ");
+                scanf("%s", cpfDestino);
+                clearBuffer();
+            }
+
+            for (int i = 0; i < t->qtd; i++)
+            {
+                if (strcmp(t->contas[i].cpf, cpfDestino) == 0)
+                {
+
+                    printf("Digite o valor da transferência: ");
+                    scanf("%f", &valor);
+                    clearBuffer();
+
+                    while (valor < 0)
+                    {
+                        printf("Valor inválido. Informe um valor maior que zero: ");
+                        scanf("%f", &valor);
+                        clearBuffer();
+                    }
+                    // Lógica para realizar a transferência
+                    for (int i = 0; i < t->qtd; i++)
+                    {
+                        if (strcmp(t->contas[i].cpf, cpfOrigem) == 0)
+                        {
+                            taxa, negativo = tipoConta(t->contas[i].tipo);
+                            porcentagem = (valor * taxa) / 100;
+                            saldo = t->contas[i].saldo - valor - porcentagem;
+                            if (saldo < negativo)
+                            {
+                                printf("Saldo insuficiente.\n");
+                                return 1;
+                            }
+                            else
+                            {
+                                t->contas[i].saldo -= valor + porcentagem;
+                                printf("Transferencia realizado com sucesso!\n");
+                                printf("Novo saldo: %.2lf\n", t->contas[i].saldo);
+                                // Salvar no extrato
+                                t->contas[i].extrato[t->qtd]->valor = valor;
+                                t->contas[i].extrato[t->qtd]->taxa = porcentagem;
+                                strcpy(t->contas[i].extrato[t->qtd]->descricao, "Transferencia");
+                                //
+                            }
+                        }
+                    }
+
+                    for (int i = 0; i < t->qtd; i++)
+                    {
+                        if (strcmp(t->contas[i].cpf, cpfDestino) == 0)
+                        {
+
+                            t->contas[i].saldo += valor;
+                            printf("Transferencia realizada com sucesso!\n");
+                            printf("Novo saldo: %.2lf\n", t->contas[i].saldo);
+                            // Salvar no extrato
+                            t->contas[i].extrato[t->qtd]->valor = valor;
+                            strcpy(t->contas[i].extrato[t->qtd]->descricao, "Transferencia");
+                            //
+                        }
+                        else
+                        {
+                            printf("Senha incorreta.\n");
+                        }
+                    }
+                }
+            }
         }
     }
-
-    if (indexOrigem == -1) {
-        printf("Conta de origem não encontrada.\n");
-        return 1;
-    }
-
-    printf("Digite a senha da conta de origem: ");
-    scanf("%s", senha);
-    clearBuffer();
-
-    if (strcmp(t->contas[indexOrigem].senha, senha) != 0) {
-        printf("Senha incorreta.\n");
-        return 1;
-    }
-
-    printf("Digite o CPF da conta de destino: ");
-    scanf("%s", cpfDestino);
-    clearBuffer();
-
-    int indexDestino = -1;
-    for (int i = 0; i < t->qtd; i++) {
-        if (strcmp(t->contas[i].cpf, cpfDestino) == 0) {
-            indexDestino = i;
-            break;
-        }
-    }
-
-    if (indexDestino == -1) {
-        printf("Conta de destino não encontrada.\n");
-        return 1;
-    }
-
-    printf("Digite o valor da transferência: ");
-    scanf("%f", &valor);
-    clearBuffer();
-
-    if (valor <= 0) {
-        printf("Valor de transferência inválido.\n");
-        return 1;
-    }
-
-    if (t->contas[indexOrigem].saldo < valor) {
-        printf("Saldo insuficiente na conta de origem.\n");
-        return 1;
-    }
-
-    t->contas[indexOrigem].saldo -= valor;
-    t->contas[indexDestino].saldo += valor;
-
-    printf("Transferência realizada com sucesso.\n");
-    printf("Novo saldo da conta de origem: %.2lf\n", t->contas[indexOrigem].saldo);
-    printf("Novo saldo da conta de destino: %.2lf\n", t->contas[indexDestino].saldo);
-
+// }
     return 0;
-
-  
 }
+
 
 
 // Salva os clientes em um arquivo
