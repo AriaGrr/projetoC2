@@ -335,9 +335,27 @@ int deposito(Clientes *t) {
         return 1;
     }
 
-    t->contas[index].saldo += valor;
-    printf("Depósito realizado com sucesso. Novo saldo: %.2lf\n", t->contas[index].saldo);
-    return 0;
+    // t->contas[index].saldo += valor;
+    // printf("Depósito realizado com sucesso. Novo saldo: %.2lf\n", t->contas[index].saldo);
+    // return 0;
+
+  // Lógica para realizar o depósito
+  for (int i = 0; i < t->qtd; i++)
+  {
+      if (strcmp(t->contas[i].cpf, cpf) == 0)
+      {
+          t->contas[i].saldo += valor;
+          printf("Depósito realizado com sucesso!\n");
+          printf("Novo saldo: %.2lf\n", t->contas[i].saldo);
+          // Salvar no extrato
+          t->contas[i].extrato[t->qtd]->valor = valor;
+          t->contas[i].extrato[t->qtd]->taxa = 0;
+          strcpy(t->contas[i].extrato[t->qtd]->descricao, "Déposito");
+      }
+  }
+  //
+  // }
+  return 0;
 }
 
 
@@ -393,7 +411,7 @@ int extrato(Clientes t)
         clearBuffer();
 
             while (!validarCPF(cpf)) {
-              
+
                 break;
 
                 printf("CPF inválido. Informe um CPF com 11 dígitos númericos: ");
@@ -445,14 +463,14 @@ int extrato(Clientes t)
             free (extrato);
                 printf("Extrato gerado com sucesso!\n");
                 printf("Saldo: %.2lf\n", t.contas[i].saldo);
-                
+
             } 
         }
             } 
         }
 
      // TODO: Implementar a lógica para gerar o extrato em txt
-    
+
   return 0;
 }
 
@@ -529,6 +547,8 @@ int transferencia(Clientes *t) {
     printf("Novo saldo da conta de destino: %.2lf\n", t->contas[indexDestino].saldo);
 
     return 0;
+
+  
 }
 
 
