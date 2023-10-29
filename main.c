@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "funcoes.h"
+// Marjorie Luize Martins Costa (RA: ) & Antonio Roth (RA: )
 
 int main() {
     int cod;
