@@ -64,7 +64,7 @@ void clearBuffer() {
     while ((c = getchar()) != '\n' && c != EOF) 
         ;
 }
-
+// Validar a senha digitada
 bool validarSenha(char senha[])
 {
     int i;
@@ -288,7 +288,7 @@ int listarClientes(Clientes t){
 }
 
 
-
+// Função para o débito
 int debito(Clientes *t)
 {
     printf("Débito:\n");
@@ -363,6 +363,8 @@ int debito(Clientes *t)
     }
     return 0;
 }
+
+// Função do déposito
 int deposito(Clientes *t){
     printf("Depósito:\n");
 
@@ -401,7 +403,7 @@ int deposito(Clientes *t){
 
     return 0;
 }
-
+// Função para transferencias
 int transferencia(Clientes *t){
 
     printf("Transferência:\n");
@@ -523,6 +525,7 @@ int transferencia(Clientes *t){
     return 0;
 }
 
+// Função do extrato
 int extrato(Clientes t, char arqextrato[]){
       printf("Extrato:\n");
 
@@ -570,6 +573,7 @@ int extrato(Clientes t, char arqextrato[]){
                         fclose(f);
                         printf("Extrato gerado com sucesso!\n");
                         printf("Transações realizadas: %d\n", t.contas[i].qtdext);
+                        // Por teste iremos imprimir o extrato na tela também
                         for (int index = 0; index < t.contas[i].qtdext; index++) {
                           printf("%s\n", t.contas[i].extrato[index].text);
                         }
