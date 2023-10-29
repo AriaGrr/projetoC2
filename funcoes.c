@@ -194,7 +194,10 @@ int cadastrarCliente(Clientes *t){
     strcpy(t->contas[t->qtd].cpf, cpf);
     strcpy(t->contas[t->qtd].senha, senha);
     t->contas[t->qtd].tipo = tipo;
+    t->contas[t->qtd].qtdext = 0;
     t->qtd++;
+    // //Salva a criação da conta no extrato
+    // sprintf(t->contas[t->qtd].extrato[t->contas[t->qtd].qtdext].text, "Déposito na criação de %.2lf", saldo); 
 
     } else {
         printf("Não é possível cadastrar mais clientes.\n");
@@ -353,10 +356,10 @@ int debito(Clientes *t)
             else
             {
                 t->contas[i].saldo -= valor + porcentagem;
-                t->contas[i].qtdext ++;
                 sprintf(t->contas[i].extrato[t->contas[i].qtdext].text,
                         "Débito feito no valor de: %.2lf Taxa: %.2lf",
                     valor, porcentagem); // salva extrato
+                t->contas[i].qtdext ++;
                 printf("Débito realizado com sucesso!\n");
                 printf("Novo saldo: %.2lf\n", t->contas[i].saldo);
 
@@ -395,9 +398,8 @@ int deposito(Clientes *t){
             t->contas[i].saldo += valor;
             printf("Depósito realizado com sucesso!\n");
             printf("Novo saldo: %.2lf\n", t->contas[i].saldo);
-            t->contas[i].qtdext ++;
             sprintf(t->contas[i].extrato[t->contas[i].qtdext].text, "Déposito feito no valor de %.2lf", valor); // salva extrato
-
+          t->contas[i].qtdext ++;
         }
     }
     //
@@ -507,12 +509,12 @@ int transferencia(Clientes *t){
                         {
 
                             t->contas[i].saldo += valor;
-                            t->contas[i].qtdext += 1;
                             sprintf(t->contas[i]
                             .extrato[t->contas[i].qtdext]
                             .text,
                         "Transferência feita pelo cpf %s no valor de %.2lf",
                         cpfOrigem, valor); // salva extrato
+                          t->contas[i].qtdext ++;
                         }
                             }
                         }
@@ -624,18 +626,21 @@ int extrato(Clientes t, char arqextrato[]){
                       if (strcmp(t.contas[i].senha, senha) == 0){
                         sprintf(arquivo, "extratoCpf:%s.txt", cpf);
                         FILE *f = fopen(arquivo, "w");
+                        
                         if (f == NULL) { 
                           printf("Falha ao abrir o arquivo");
                         }
+                        
                         // Extratos para o arquivo
                         for (int iext = 0;
                              iext < t.contas[i].qtdext;
                              iext++) {
-                          // fprintf(f, "%s\n", t.contas[i].extrato[iext].text);
-                          // printf("%s\n",t.contas[i].extrato[iext].text);
+                          fprintf(f, "%s\n", t.contas[i].extrato[iext].text);
+                          //printf("indice %d %s\n", iext,t.contas[i].extrato[iext].text);
                         }
                         fclose(f);
                         printf("Extrato gerado com sucesso!\n");
+                        printf("Transações realizadas: %d\n", t.contas[i].qtdext);
                         for (int index = 0; index < t.contas[i].qtdext; index++) {
                           printf("%s\n", t.contas[i].extrato[index].text);
                         }
