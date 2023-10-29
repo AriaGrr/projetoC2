@@ -120,12 +120,7 @@ int cadastrarCliente(Clientes *t){
         scanf("%s", cpf);
         clearBuffer();
 
-        // // Validar que o CPF informado tem 11 dígitos
-        // while (strlen(cpf) != 11) {
-        //     printf("CPF inválido. Informe um CPF com 11 dígitos: ");
-        //     scanf("%s", cpf);
-        //     clearBuffer();
-        // }
+     
         while (!validarCPF(cpf)) {
             printf("CPF inválido. Informe um CPF com 11 dígitos númericos: ");
             scanf("%s", cpf);
@@ -357,8 +352,8 @@ int debito(Clientes *t)
             {
                 t->contas[i].saldo -= valor + porcentagem;
                 sprintf(t->contas[i].extrato[t->contas[i].qtdext].text,
-                        "Débito feito no valor de: %.2lf Taxa: %.2lf",
-                    valor, porcentagem); // salva extrato
+                        "Débito feito no valor de: %.2lf | Taxa: %.2lf | Saldo: %.lf",
+                    valor, porcentagem, t->contas[i].saldo); // salva extrato
                 t->contas[i].qtdext ++;
                 printf("Débito realizado com sucesso!\n");
                 printf("Novo saldo: %.2lf\n", t->contas[i].saldo);
@@ -398,7 +393,7 @@ int deposito(Clientes *t){
             t->contas[i].saldo += valor;
             printf("Depósito realizado com sucesso!\n");
             printf("Novo saldo: %.2lf\n", t->contas[i].saldo);
-            sprintf(t->contas[i].extrato[t->contas[i].qtdext].text, "Déposito feito no valor de %.2lf", valor); // salva extrato
+            sprintf(t->contas[i].extrato[t->contas[i].qtdext].text, "Déposito feito no valor de %.2lf | Saldo: %.2lf", valor, t->contas[i].saldo); // salva extrato
           t->contas[i].qtdext ++;
         }
     }
@@ -500,8 +495,8 @@ int transferencia(Clientes *t){
                     t->contas[i]
                         .extrato[t->contas[i].qtdext]
                         .text,
-                    "Transferência: %.2lf, tarifa: %.2f saldo: %.2lf ",
-                    valor, porcentagem, t->contas[i].saldo); // salva extrato
+                    "Transferência: %.2lf | Tarifa: %.2f | Saldo: %.2lf ",
+                    valor, porcentagem, t->contas[i].saldo); // Salva extrato
                 t->contas[i].qtdext ++;
                     for (int i = 0; i < t->qtd; i++)
                     {
@@ -527,72 +522,6 @@ int transferencia(Clientes *t){
 
     return 0;
 }
-
-// int extrato(Clientes t)
-// {
-//     printf("Extrato:\n");
-
-//     char cpf[12]; // Incluindo espaço para o caractere nulo '\0'
-//     char senha[7]; // Incluindo espaço para o caractere nulo '\0'
-//     printf("Digite o CPF do cliente: ");
-//     scanf("%s", cpf);
-//     clearBuffer();
-
-//     while (!validarCPF(cpf)) {
-//         printf("CPF inválido. Informe um CPF com 11 dígitos númericos: ");
-//         scanf("%s", cpf);
-//         clearBuffer();
-//     }
-
-//     for (int i = 0; i < t.qtd; i++) {
-//         if (strcmp(t.contas[i].cpf, cpf) == 0) {
-
-//         printf("Digite a senha do cliente: ");
-//         scanf("%s", senha);
-//         clearBuffer();
-
-//         // Validar a senha
-//         while (!validarSenha(senha)) {
-//             printf("Senha inválida. Informe uma senha com 6 dígitos númericos: ");
-//             scanf("%s", senha);
-//             clearBuffer();
-//         }
-
-//         if (validarCPF(cpf) && validarSenha(senha)) {
-//             // Lógica para gerar o extrato em txt, anotando todas as transações da conta requerida
-
-//             // Abre o arquivo TXT
-//             FILE *arquivo = fopen("extrato.txt", "w");
-
-//             // Verifica se o arquivo foi aberto com sucesso
-//             if (arquivo == NULL) {
-//                 printf("Erro ao abrir o arquivo.\n");
-//                 return 1;
-//             }
-
-//             // Escreve o cabeçalho do arquivo
-//             fprintf(arquivo, "EXTRATO\n");
-
-//             int qtdext = t.contas[i].qtdext;
-//             // // // Aloca memória para um vetor de 2 operações
-//             // // Operacao *extrato = malloc(qtdext * sizeof(Operacao));
-
-//             // Escreve as transações do extrato
-//             for (int qtd = 0; qtd < t.contas[i].qtdext; qtd++) {
-//                 fprintf(arquivo, "%s\n", t.contas[i].extrato[qtdext].text);
-//             }
-
-//             // Fecha o arquivo
-//             fclose(arquivo);
-
-//             // free (extrato);
-//             printf("Extrato gerado com sucesso!\n");
-
-//             } 
-//         }
-//     }
-//       return 0;
-//     }
 
 int extrato(Clientes t, char arqextrato[]){
       printf("Extrato:\n");
