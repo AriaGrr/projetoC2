@@ -5,14 +5,8 @@
 int main() {
     int cod;
     char arquivo[] = "clientes";
+    char arqextrato[] = "-";
     Clientes t;
-
-    // // Criando uma estrutura Conta e um ponteiro para ela
-    // Conta conta; // Declaração de uma variável do tipo Conta
-    // Conta *ponteiro_para_contas; // Declaração de um ponteiro para Conta
-
-    // // Atribuindo o endereço da variável conta ao ponteiro ponteiro_para_contas
-    // ponteiro_para_contas = &conta;
 
     cod = carregar(&t, arquivo);
     if (cod == 1) {
@@ -46,33 +40,46 @@ int main() {
             system("clear");
         }
         else if (opcao == 4) {
+            system("clear");
             debito(&t);
+            printf("Pressione Enter para voltar ao menu...");
+            getchar(); // Captura o Enter
+            getchar(); // Aguarda o próximo Enter
             system("clear");
         }
         else if (opcao == 5) {
+            system("clear");
             deposito(&t);
+            printf("Pressione Enter para voltar ao menu...");
+            getchar(); // Captura o Enter
+            getchar(); // Aguarda o próximo Enter
             system("clear");
         }
         else if (opcao == 6) {
             system("clear");
-            extrato(t);
+            extrato(t, arqextrato);
             printf("Pressione Enter para voltar ao menu...");
             getchar(); // Captura o Enter
             getchar(); // Aguarda o próximo Enter
             system("clear");
         }
         else if (opcao == 7) {
+            system("clear");
             transferencia(&t);
+            printf("Pressione Enter para voltar ao menu...");
+            getchar(); // Captura o Enter
+            getchar(); // Aguarda o próximo Enter
             system("clear");
         }
         else {
             printf("Opção não existe!\n");
         }
+        cod = salvar(t, arquivo);
     } while (opcao != 0);
 
-    cod = salvar(t, arquivo);
-    if (cod != 0) {
-        printf("Erro ao salvar!\n");
-    }
-    return 0;
-}
+      cod = salvar(t, arquivo);
+      if (cod != 0) {
+          printf("Erro ao salvar!\n");
+      }
+      return 0;
+  }
