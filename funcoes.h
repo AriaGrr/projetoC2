@@ -3,12 +3,14 @@
 
 // Struct com os extratos de cada conta
 // Gera um arquivo com o histórico de todas as operações realizadas na conta
-typedef struct {
+typedef struct
+{
   char text[150];
 } Operacao;
 
 // Struct com os dados de cada conta
-typedef struct {
+typedef struct
+{
   char nome[100];
   char cpf[12];
   char senha[7];
@@ -19,8 +21,9 @@ typedef struct {
 } Conta;
 
 // Struct com os dados de cada cliente
-typedef struct {
-  Conta contas[1000]; // Use menos contas no teste do replit, exemplo: 10 
+typedef struct
+{
+  Conta contas[1000]; // Use menos contas no teste do replit, exemplo: 10
   size_t qtd;
 } Clientes;
 
@@ -50,4 +53,3 @@ int tipoConta(char tipo);
 int salvar(Clientes t, char nome[]);
 // fread
 int carregar(Clientes *t, char nome[]);
-

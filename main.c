@@ -3,44 +3,52 @@
 #include "funcoes.h"
 // Marjorie Luize Martins Costa (RA: ) & Antonio Roth (RA: )
 
-int main() {
+int main()
+{
     int cod;
     char arquivo[] = "clientes";
     char arqextrato[] = "-";
     Clientes t;
 
     cod = carregar(&t, arquivo);
-    if (cod == 1) {
+    if (cod == 1)
+    {
         t.qtd = 0;
     }
 
     int opcao;
 
-    do {    
+    do
+    {
         menu();
         scanf("%d", &opcao);
         printf("%d\n", opcao);
 
-        if (opcao == 0) {
+        if (opcao == 0)
+        {
             printf("Saindo...\n");
         }
-        else if (opcao == 1) {
+        else if (opcao == 1)
+        {
             cadastrarCliente(&t);
             system("clear");
         }
-        else if (opcao == 2) {
+        else if (opcao == 2)
+        {
             apagarCliente(&t);
             system("clear");
         }
-        else if (opcao == 3) {
+        else if (opcao == 3)
+        {
             system("clear");
-            listarClientes(t); 
+            listarClientes(t);
             printf("Pressione Enter para voltar ao menu...");
             getchar(); // Captura o Enter
             getchar(); // Aguarda o próximo Enter
             system("clear");
         }
-        else if (opcao == 4) {
+        else if (opcao == 4)
+        {
             system("clear");
             debito(&t);
             printf("Pressione Enter para voltar ao menu...");
@@ -48,7 +56,8 @@ int main() {
             getchar(); // Aguarda o próximo Enter
             system("clear");
         }
-        else if (opcao == 5) {
+        else if (opcao == 5)
+        {
             system("clear");
             deposito(&t);
             printf("Pressione Enter para voltar ao menu...");
@@ -56,7 +65,8 @@ int main() {
             getchar(); // Aguarda o próximo Enter
             system("clear");
         }
-        else if (opcao == 6) {
+        else if (opcao == 6)
+        {
             system("clear");
             extrato(t, arqextrato);
             printf("Pressione Enter para voltar ao menu...");
@@ -64,7 +74,8 @@ int main() {
             getchar(); // Aguarda o próximo Enter
             system("clear");
         }
-        else if (opcao == 7) {
+        else if (opcao == 7)
+        {
             system("clear");
             transferencia(&t);
             printf("Pressione Enter para voltar ao menu...");
@@ -72,15 +83,17 @@ int main() {
             getchar(); // Aguarda o próximo Enter
             system("clear");
         }
-        else {
+        else
+        {
             printf("Opção não existe!\n");
         }
         cod = salvar(t, arquivo);
     } while (opcao != 0);
 
-      cod = salvar(t, arquivo);
-      if (cod != 0) {
-          printf("Erro ao salvar!\n");
-      }
-      return 0;
-  }
+    cod = salvar(t, arquivo);
+    if (cod != 0)
+    {
+        printf("Erro ao salvar!\n");
+    }
+    return 0;
+}
