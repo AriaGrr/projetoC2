@@ -20,7 +20,7 @@ typedef struct {
 
 // Struct com os dados de cada cliente
 typedef struct {
-  Conta contas[10]; // Menos contas para poder testar no replit
+  Conta contas[1000]; // Use menos contas no teste do replit, exemplo: 10 
   size_t qtd;
 } Clientes;
 
