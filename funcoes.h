@@ -2,11 +2,9 @@
 #include <stdbool.h>
 
 // Struct com os extratos de cada conta
-// Gera um arquivo com o histórico de todas as operações realizadas na conta, com datas e valores, incluindo as tarifas.
+// Gera um arquivo com o histórico de todas as operações realizadas na conta
 typedef struct {
-  double valor;
-  double taxa;
-  char descricao[100];
+  char text[150];
 } Operacao;
 
 // Struct com os dados de cada conta
@@ -16,19 +14,13 @@ typedef struct {
   char senha[7];
   int tipo;
   double saldo;
-  Operacao *extrato[100];
+  Operacao extrato[100];
+  int qtdext;
 } Conta;
-
-// cs[0].extrato[0].valor
 
 // Struct com os dados de cada cliente
 typedef struct {
-  // Ponteiro ou lista
-  // Conta contas[1000];
-  //  Conta *contas;
-
-  // Lista de contas
-  Conta contas[1000];
+  Conta contas[10];
   size_t qtd;
 } Clientes;
 
@@ -48,10 +40,9 @@ int debito(Clientes *t);
 
 int deposito(Clientes *t);
 
-//Struct com os extratos?
-int extrato(Clientes t);
-
 int transferencia(Clientes *t);
+
+int extrato(Clientes t, char arqextrato[]);
 
 int tipoConta(char tipo);
 
@@ -59,3 +50,4 @@ int tipoConta(char tipo);
 int salvar(Clientes t, char nome[]);
 // fread
 int carregar(Clientes *t, char nome[]);
+
