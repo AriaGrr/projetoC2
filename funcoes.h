@@ -1,43 +1,55 @@
 #include <stdio.h>
+#include <stdbool.h>
 
-typedef struct {
-    int prioridade;
-    int estado;
-    char categoria[100];
-    char descricao[300];
-} Tarefa;
+// Struct com os extratos de cada conta
+// Gera um arquivo com o histórico de todas as operações realizadas na conta
+typedef struct
+{
+  char text[150];
+} Operacao;
 
-typedef struct {
-    Tarefa tarefas[100];
-    int qtd;
-} ListaDeTarefas;
+// Struct com os dados de cada conta
+typedef struct
+{
+  char nome[100];
+  char cpf[12];
+  char senha[7];
+  int tipo;
+  double saldo;
+  Operacao extrato[100];
+  int qtdext;
+} Conta;
 
-char* estado(int e);
+// Struct com os dados de cada cliente
+typedef struct
+{
+  Conta contas[1000]; // Use menos contas no teste do replit, exemplo: 10
+  size_t qtd;
+} Clientes;
 
-//Funções principais
-int criarTarefa(ListaDeTarefas *lt);
-int deletarTarefa(ListaDeTarefas *lt);
-int alterarTarefa(ListaDeTarefas *lt);
+void menu();
 
-// Funções para exportar
-int exportarTarefas(ListaDeTarefas lt,     char exportado[]); // Adicional, não feito.
-int exportarPrioridade(ListaDeTarefas lt, char exportado[]);
-int exportarCategoria(ListaDeTarefas lt, char exportado[]);
-int exportarPCTarefa(ListaDeTarefas lt, char exportado[]);
+bool validarCPF(char cpf[]);
 
-//Funções de listagem
-int listarTarefas(ListaDeTarefas lt);
-int listarPrioridade(ListaDeTarefas lt);
-int listarCategoria(ListaDeTarefas lt);
-int listarPCTarefa(ListaDeTarefas lt);
-int listarEstado(ListaDeTarefas lt);
+void clearBuffer();
 
+int cadastrarCliente(Clientes *t);
 
-void menuExportar();
-void menuListagem();
-void printMenu();
+int apagarCliente(Clientes *t);
+
+int listarClientes(Clientes t);
+
+int debito(Clientes *t);
+
+int deposito(Clientes *t);
+
+int transferencia(Clientes *t);
+
+int extrato(Clientes t, char arqextrato[]);
+
+int tipoConta(char tipo);
+
 // fwrite
-int salvarLista(ListaDeTarefas lt, char nome[]);
+int salvar(Clientes t, char nome[]);
 // fread
-int carregarLista(ListaDeTarefas *lt, char nome[]);
-
+int carregar(Clientes *t, char nome[]);
